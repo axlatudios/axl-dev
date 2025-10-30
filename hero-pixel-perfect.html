@@ -1,0 +1,81 @@
+    <!DOCTYPE html>
+    <html lang="it">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AXL Studios — Hero (Pixel Perfect 1920×940)</title>
+    <link rel="stylesheet" href="./hero-pixel-perfect.css" />
+    <meta name="robots" content="noindex" />
+    </head>
+    <body>
+    <!-- Wrapper fisso a 1920px per fedeltà al pixel -->
+    <div class="pp-wrapper">
+        <!-- Navbar fissa, trasparente, senza blur -->
+        <header class="pp-navbar" role="banner">
+        <div class="pp-nav-left">
+            <!-- Placeholder Logo dalle dimensioni approssimate nel mock -->
+            <div class="pp-logo"></div>
+            <div class="pp-logo2"></div>
+            <div class="pp-logo3"></div>
+            <div class="pp-logo4"></div>
+        </div>
+        <nav class="pp-nav" aria-label="Main">
+            <a href="#about" class="pp-nav-item">About AXL</a>
+            <a href="#services" class="pp-nav-item">Servizi</a>
+            <a href="#projects" class="pp-nav-item">Progetti</a>
+            <a href="#team" class="pp-nav-item">Team</a>
+            <a href="#stack" class="pp-nav-item">Strumenti</a>
+            <a href="#contact" class="pp-nav-item pp-contact">
+            <span>Contattaci</span>
+            <svg class="pp-contact-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="6" width="12" height="12" rx="0" ry="0" />
+            </svg>
+            </a>
+        </nav>
+        </header>
+
+        <!-- HERO 1920×940 -->
+        <section class="pp-hero" id="home" style="background-image:url('./assets/hero-placeholder-1920x940.jpg')">
+        <!-- Video come nel mock (se presente). Metti il file in ./assets/gifAxL.mp4 -->
+        <video class="pp-hero-bg"
+                src="./assets/gifAxL.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="./assets/hero-placeholder-1920x940.jpg">
+        </video>
+
+        <!-- Overlay -->
+        <div class="pp-hero-overlay" aria-hidden="true"></div>
+
+        <div class="pp-hero-inner">
+            <div class="pp-hero-stack">
+            <h1 class="pp-title">
+            <span class="pp-title-axl">AXL Studios,</span><br>
+            <span class="pp-title-where500">where</span>
+            <span class="pp-title-strong">Design</span>
+            <span class="pp-title-where500">meets</span>
+            <span class="pp-title-strong">Code</span>
+            </h1>
+            <p class="pp-subtitle">
+                Siamo una web agency che unisce estetica e tecnologia per creare esperienze digitali chiare, funzionali e d’impatto.
+            </p>
+            </div>
+
+            <div class="pp-cta-row">
+            <a class="pp-cta" href="#about">
+                <span class="pp-cta-text">SCopri di più</span>
+                <span class="pp-cta-icon" aria-hidden="true">
+                <!-- replica dell'elemento ruotato 135° -->
+                <svg width="16" height="8" viewBox="0 0 16 8">
+                    <path d="M0 8 L8 0 L16 8" fill="#FAFAFB"/>
+                </svg>
+                </span>
+            </a>
+            </div>
+        </div>
+        </section>
+    </div>
+    </body>
+    </html>
