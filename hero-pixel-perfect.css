@@ -305,4 +305,12 @@ body{
   vertical-align: baseline;
 }
 
+/* === Posizionamento virgoletta finale separata === */
+.pp-quote-mark--end{
+  display: inline-block;
+  transform: rotate(180deg) translateY(-0.8em); /* 0.8 → una riga circa */
+  margin-right: 710px; 
+  line-height: 1;
+  vertical-align: bottom;
+}
 /* Fine */
