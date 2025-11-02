@@ -3,19 +3,25 @@
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AXL Studios — Hero (Pixel Perfect 1920×940)</title>
+    <title>AXL Studios </title>
     <link rel="stylesheet" href="./hero-pixel-perfect.css" />
     <meta name="robots" content="noindex" />
     </head>
     <body>
-    <!-- Wrapper fisso a 1920px per fedeltà al pixel -->
+    <!-- Wrapper -->
     <div class="pp-wrapper">
-        <!-- Navbar fissa, trasparente, senza blur -->
+        <!-- NAVBAR -->
         <header class="pp-navbar" role="banner">
         <div class="pp-nav-left">
-            <!-- Placeholder Logo dalle dimensioni approssimate nel mock -->
             <div class="pp-logo"></div>
         </div>
+
+        <!-- Toggle mobile senza JS -->
+        <input id="pp-menu-toggle" type="checkbox" class="pp-menu-toggle" aria-label="Apri/chiudi menu" />
+        <label for="pp-menu-toggle" class="pp-burger" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </label>
+
         <nav class="pp-nav" aria-label="Main">
             <a href="#about" class="pp-nav-item">About AXL</a>
             <a href="#services" class="pp-nav-item">Servizi</a>
@@ -24,36 +30,32 @@
             <a href="#stack" class="pp-nav-item">Strumenti</a>
             <a href="#contact" class="pp-nav-item pp-contact">
             <span>Contattaci</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M17.9999 7.05C17.9999 6.78478 17.8946 6.53043 17.707 6.34289C17.5195 6.15536 17.2652 6.05 16.9999 6.05L8.99994 6C8.73472 6 8.48037 6.10536 8.29283 6.29289C8.1053 6.48043 7.99994 6.73478 7.99994 7C7.99994 7.26522 8.1053 7.51957 8.29283 7.70711C8.48037 7.89464 8.73472 8 8.99994 8H14.5599L6.28994 16.29C6.19621 16.383 6.12182 16.4936 6.07105 16.6154C6.02028 16.7373 5.99414 16.868 5.99414 17C5.99414 17.132 6.02028 17.2627 6.07105 17.3846C6.12182 17.5064 6.19621 17.617 6.28994 17.71C6.3829 17.8037 6.4935 17.8781 6.61536 17.9289C6.73722 17.9797 6.86793 18.0058 6.99994 18.0058C7.13195 18.0058 7.26266 17.9797 7.38452 17.9289C7.50638 17.8781 7.61698 17.8037 7.70994 17.71L15.9999 9.42V15C15.9999 15.2652 16.1053 15.5196 16.2928 15.7071C16.4804 15.8946 16.7347 16 16.9999 16C17.2652 16 17.5195 15.8946 17.707 15.7071C17.8946 15.5196 17.9999 15.2652 17.9999 15V7.05Z" fill="#FAFAFB"/>
-                </svg>
+            </svg>
             </a>
         </nav>
         </header>
 
-        <!-- HERO 1920×940 -->
+        <!-- HERO -->
         <section class="pp-hero" id="home" style="background-image:url('./assets/hero-placeholder-1920x940.jpg')">
-        <!-- Video come nel mock (se presente). Metti il file in ./assets/gifAxL.mp4 -->
         <video class="pp-hero-bg"
                 src="./assets/gifAxL.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-                poster="./assets/hero-placeholder-1920x940.jpg">
+                autoplay muted loop playsinline
+                poster="./assets/hero-placeholder-1920x940.jpg" aria-hidden="true">
         </video>
 
-        <!-- Overlay -->
         <div class="pp-hero-overlay" aria-hidden="true"></div>
 
         <div class="pp-hero-inner">
             <div class="pp-hero-stack">
             <h1 class="pp-title">
-            <span class="pp-title-axl">AXL Studios,</span><br>
-            <span class="pp-title-where500">where</span>
-            <span class="pp-title-strong">Design</span>
-            <span class="pp-title-where500">meets</span>
-            <span class="pp-title-strong">Code</span>
+                <span class="pp-title-axl">AXL Studios,</span><br>
+                <span class="pp-title-where500">where</span>
+                <span class="pp-title-strong">Design</span>
+                <span class="pp-title-where500">meets</span>
+                <span class="pp-title-strong">Code</span>
             </h1>
             <p class="pp-subtitle">
                 Siamo una web agency che unisce estetica e tecnologia per creare esperienze digitali chiare, funzionali e d’impatto.
@@ -64,12 +66,63 @@
             <a class="pp-cta" href="#about">
                 <span class="pp-cta-text">Scopri di più</span>
                 <span class="pp-cta-badge" aria-hidden="true">
-                <svg class="pp-arrow-down" viewBox="0 0 24 24">
+                <svg class="pp-arrow-down" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12 16.5c-.2 0-.39-.08-.53-.22l-5-5a.75.75 0 0 1 1.06-1.06l4.22 4.22V6.75a.75.75 0 0 1 1.5 0v7.69l4.22-4.22a.75.75 0 1 1 1.06 1.06l-5 5c-.14.14-.33.22-.53.22Z"/>
                 </svg>
                 </span>
             </a>
             </div>
+        </div>
+        </section>
+
+        <!-- STORY / ABOUT -->
+        <section class="pp-story" id="about" style="background-image:url('./assets/story-placeholder-1920x1310.jpg')">
+        <div class="pp-story-inner">
+            <h2 class="pp-story-title">
+            <span class="pp-story-title-plain">Un’unica</span>
+            <span class="pp-story-title-italic"> visione</span><span class="pp-story-title-plain">:</span><br>
+            <span class="pp-story-title-plain">far convivere </span>
+            <span class="pp-story-title-accent">creatività</span>
+            <span class="pp-story-title-plain"> e </span>
+            <span class="pp-story-title-accent">tecnologia.</span>
+            </h2>
+
+            <p class="pp-story-subtitle">
+            Non ci limitiamo a progettare interfacce. Costruiamo esperienze dove forma e funzione si completano.
+            </p>
+
+            <div class="pp-story-grid">
+            <section class="pp-story-col">
+                <h3 class="pp-story-col-title">Chi siamo</h3>
+                <p class="pp-story-col-text">
+                AXL Studios nasce dall’idea che il web non sia solo tecnologia, ma linguaggio…
+                </p>
+            </section>
+
+            <section class="pp-story-col">
+                <h3 class="pp-story-col-title">Il nostro metodo</h3>
+                <p class="pp-story-col-text">
+                Non ci limitiamo a progettare interfacce: costruiamo esperienze su misura…
+                </p>
+            </section>
+
+            <section class="pp-story-col">
+                <h3 class="pp-story-col-title">La nostra filosofia</h3>
+                <p class="pp-story-col-text">
+                Crediamo nella collaborazione come motore di ogni processo creativo…
+                </p>
+            </section>
+            </div>
+
+            <figure class="pp-quote">
+            <span class="pp-quote-mark">“</span>
+            <blockquote class="pp-quote-text">
+                <span>Design senza codice è incompleto.</span>
+                <span>Codice senza design è senz’anima.</span>
+                <span>Noi uniamo entrambi.</span>
+                <span class="pp-quote-mark pp-quote-mark--end">“</span>
+            </blockquote>
+            </figure>
         </div>
         </section>
     </div>
