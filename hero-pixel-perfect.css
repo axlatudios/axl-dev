@@ -34,11 +34,11 @@
   --axl-text-100:#FAFAFB;
   --axl-text-400:#A9A8A8;
 
-  /* tokens responsive utili */
+  /* responsive tokens */
   --container-pad: clamp(16px, 4vw, 80px);
 
   /* glass tuning */
-  --glass-blur: 10px;   /* meno sfocato */
+  --glass-blur: 10px;
   --glass-sat:  140%;
 }
 
@@ -82,7 +82,6 @@ body::before{
 }
 .pp-logo{ width:78px; height:32px; background:url("./assets/logo.svg") center/contain no-repeat; }
 
-/* Nav desktop */
 .pp-nav{
   display:flex; align-items:center; gap:clamp(10px,1.6vw,24px);
 }
@@ -95,7 +94,7 @@ body::before{
 .pp-contact svg{ flex:0 0 auto; }
 
 /* Hamburger logic */
-.pp-menu-toggle{ position:absolute; opacity:0; pointer-events:none; } /* input nascosto */
+.pp-menu-toggle{ position:absolute; opacity:0; pointer-events:none; }
 .pp-burger{
   display:none; width:22px; height:16px; position:relative; cursor:pointer; margin-left:12px;
 }
@@ -107,7 +106,6 @@ body::before{
 .pp-burger span:nth-child(2){ top:calc(50% - 1px); }
 .pp-burger span:nth-child(3){ bottom:0; }
 
-/* Stato aperto */
 .pp-menu-toggle:checked + label.pp-burger span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
 .pp-menu-toggle:checked + label.pp-burger span:nth-child(2){ opacity:0; transform:scaleX(.5); }
 .pp-menu-toggle:checked + label.pp-burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
@@ -117,7 +115,7 @@ body::before{
   .pp-burger{ display:block; z-index:102; -webkit-tap-highlight-color:transparent; }
 
   .pp-nav{
-    position:fixed; inset:auto 0 0 0; top:64px; /* sotto la navbar */
+    position:fixed; inset:auto 0 0 0; top:64px;
     display:flex; flex-direction:column; align-items:flex-start;
     gap:16px; padding:16px var(--container-pad) 24px;
     background:rgba(21,20,21,0.92);
@@ -125,44 +123,23 @@ body::before{
     border-top:1px solid rgba(250,250,251,.08);
     z-index:101;
 
-    /* stato chiuso */
-    max-height:0;
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transform: translateY(-6px);
+    max-height:0; opacity:0; visibility:hidden; pointer-events:none; transform: translateY(-6px);
     transition: max-height .25s ease, opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
   }
-
-  /* voci tappabili */
   .pp-nav-item{
-    display:block;
-    font-size: clamp(18px, 4.6vw, 22px);
-    font-weight: 800;
-    letter-spacing: .5px;
-    padding: 10px 0;
+    display:block; font-size: clamp(18px, 4.6vw, 22px); font-weight: 800; letter-spacing: .5px; padding: 10px 0;
   }
-
-  /* stato aperto */
   .pp-menu-toggle:checked ~ nav.pp-nav{
-    max-height:70vh;
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform: translateY(0);
+    max-height:70vh; opacity:1; visibility:visible; pointer-events:auto; transform: translateY(0);
     transition: max-height .25s ease, opacity .22s ease, transform .22s ease, visibility 0s;
   }
-
-  /* Burger in X (duplicato per specificità mobile) */
   .pp-menu-toggle:checked + label.pp-burger span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
   .pp-menu-toggle:checked + label.pp-burger span:nth-child(2){ opacity:0; transform: scaleX(.5); }
   .pp-menu-toggle:checked + label.pp-burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
 }
 
 /* (modern) blocca scroll quando menu aperto */
-@supports(selector(body:has(#ppMenu:checked))){
-  body:has(#ppMenu:checked){ overflow:hidden; }
-}
+@supports(selector(body:has(#ppMenu:checked))){ body:has(#ppMenu:checked){ overflow:hidden; } }
 
 /* ========== HERO ========== */
 .pp-hero{
@@ -181,17 +158,13 @@ body::before{
   display:flex; flex-direction:column; justify-content:center; align-items:center; gap: clamp(20px,3vw,56px); z-index:3;
 }
 .pp-hero-stack{ align-self:stretch; display:flex; flex-direction:column; align-items:center; gap: clamp(16px,2.4vw,32px); }
-
 .pp-title{ margin:0; text-align:center; font-size:0; }
 .pp-title-axl,.pp-title-strong{
   color:#FAFAFB; font-family:"Urbanist"; font-weight:800; line-height:1.1; display:inline-block;
   font-size: clamp(38px,6vw,104px);
 }
 .pp-title-axl{ color:var(--axl-pink-300); }
-.pp-title-where500{
-  color:#FAFAFB; font-family:"Urbanist"; font-weight:500; line-height:1.1; display:inline-block;
-  font-size: clamp(38px,6vw,104px);
-}
+.pp-title-where500{ color:#FAFAFB; font-family:"Urbanist"; font-weight:500; line-height:1.1; display:inline-block; font-size: clamp(38px,6vw,104px); }
 .pp-title span + span{ margin-left:.25em; }
 .pp-subtitle{
   align-self:stretch; text-align:center; color:#FAFAFB;
@@ -216,7 +189,6 @@ body::before{
 /* ========== STORY / ABOUT ========== */
 .pp-story{ position:relative; width:100%; padding:clamp(48px,8vw,120px) var(--container-pad); display:flex; justify-content:flex-end; background:transparent; }
 .pp-story-inner{ width:100%; max-width:1920px; margin:0 auto; display:flex; flex-direction:column; gap: clamp(32px,5vw,80px); }
-
 .pp-story-title{ margin:0; font-size:0; }
 .pp-story-title-plain,.pp-story-title-italic,.pp-story-title-accent{
   display:inline-block; font-family:"Urbanist"; font-weight:800; line-height:1.1; font-size: clamp(28px,5vw,80px); color:var(--axl-text-100);
@@ -241,24 +213,15 @@ body::before{
 .pp-story-col-text{ margin:0; color:var(--axl-text-100); font-family:"Inter"; font-weight:400; font-size: clamp(14px,1.2vw,18px); line-height:1.6; }
 
 /* ===== Quote ===== */
-.pp-quote{
-  display:grid; grid-template-columns:auto 1fr;
-  gap: clamp(12px,1.2vw,24px); align-items:start;
-}
-.pp-quote .pp-quote-mark{
-  color:var(--axl-pink-300); font-family:"Urbanist"; font-weight:700;
-  font-size:clamp(56px,6vw,104px); line-height:1.1;
-}
+.pp-quote{ display:grid; grid-template-columns:auto 1fr; gap: clamp(12px,1.2vw,24px); align-items:start; }
+.pp-quote .pp-quote-mark{ color:var(--axl-pink-300); font-family:"Urbanist"; font-weight:700; font-size:clamp(56px,6vw,104px); line-height:1.1; }
 .pp-quote-text{
   margin:0; color:var(--axl-text-100); font-family:"Urbanist"; font-style:italic; font-weight:700;
   font-size:clamp(20px,3.2vw,48px); line-height:clamp(28px,4vw,60px);
 }
 .pp-quote-text > span{ display:block; margin-bottom: clamp(10px,1vw,16px); }
 .pp-quote-text > span:last-child{ margin-bottom:0; position:relative; display:block; }
-.pp-quote-mark--end{
-  position:absolute; transform:rotate(180deg);
-  left: 790px; bottom:0; margin:0;
-}
+.pp-quote-mark--end{ position:absolute; transform:rotate(180deg); left: 790px; bottom:0; margin:0; }
 
 /* ========== SERVIZI (Figma + drag infinito) ========== */
 .pp-services{
@@ -277,80 +240,72 @@ body::before{
   font-size: clamp(18px,2.4vw,32px); line-height: 1.2;
 }
 
-/* Rails */
-.pp-services-strip{ width:100%; position:relative; }
+/* Strip + layers */
+.pp-services-strip{ position:relative; width:100%; overflow:hidden; }
+
+/* Poster/sizing block (mantiene altezza) */
 .pp-services-bg{
   position:relative;
   width:100%;
   height: clamp(560px, 50vw, 800px);
-  background: url("./assets/gifAxL.mp4") center/cover no-repeat; /* unico poster di sezione */
+  background: url("./assets/bgcard.png") center/cover no-repeat;
+  z-index:-4; /* sotto al video */
+}
+
+/* Video decorativo ruotato, sotto overlay */
+.pp-services-bg-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   transform: rotate(180deg);
+  z-index:-3; pointer-events:none;
 }
-.pp-services-bg::after{
-  content:"";
-  position:absolute; inset:0;
-  background: rgba(0,0,0,0.12); /* 0.10–0.18 */
-  pointer-events:none;
+
+/* Overlay scuro/blur sopra il video, sotto le card */
+.pp-services-strip::after{
+  content:""; position:absolute; inset:0;
+  background:rgba(0,0,0,0.15);
+  -webkit-backdrop-filter:blur(12px) saturate(110%); backdrop-filter:blur(12px) saturate(110%);
+  z-index:-1;
 }
+
+/* Viewport con le card: sta sopra overlay+video */
 .pp-services-viewport{
-  position:absolute; inset:0; height:100%; overflow:hidden; cursor:grab;
-  touch-action: pan-y; /* consenti scroll verticale naturale */
+  position:absolute; inset:0; height:100%;
+  overflow:hidden; cursor:grab; touch-action: pan-y;
+  z-index:0;
 }
 .pp-services-viewport:active{ cursor:grabbing; }
+
 .pp-services-track{ position:absolute; top:0; left:0; height:100%; display:flex; will-change:transform; }
 
-/* Card responsive (larghezza dinamica) */
+/* Card */
 .pp-service{
   flex: 0 0 var(--card-w, 600px);
   width: var(--card-w, 600px);
   height: 100%;
-  display:flex;
-  align-items:stretch;
-  justify-content:center;
-  position:relative;
+  display:flex; align-items:stretch; justify-content:center; position:relative;
 }
 .pp-service + .pp-service::before{
   content:""; position:absolute; top:5%; bottom:5%; left:0; width:2px;
   background:linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 35%, rgba(255,255,255,0.22) 65%, rgba(255,255,255,0) 100%);
   pointer-events:none; z-index:2;
 }
-
-/* Card padding e typo */
 .pp-service-inner{
-  position: relative;
-  width:100%; height:100%;
+  position: relative; width:100%; height:100%;
   padding: clamp(32px,6vw,80px);
   display:flex; flex-direction:column; justify-content:space-between;
-
-  /* glass meno sfocato */
   background: rgba(255,255,255,0.10);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
   border: 1px solid rgba(255,255,255,0.18);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.12),
-    0 8px 28px rgba(0,0,0,0.32);
-
-  isolation: isolate;
-  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 28px rgba(0,0,0,0.32);
+  isolation: isolate; overflow:hidden;
 }
 .pp-service-inner::before{
-  content:"";
-  position:absolute; inset:0;
-  border-radius: inherit;
-  background: rgba(0,0,0,0.22);   /* 0.18–0.28 per contrasto */
-  z-index: 0;
-  pointer-events:none;
+  content:""; position:absolute; inset:0; border-radius: inherit;
+  background: rgba(0,0,0,0.22); z-index:0; pointer-events:none;
 }
-/* rimosso il poster per-card */
-.pp-service-inner::after{
-  content:none !important;
-}
+.pp-service-inner > *{ position: relative; z-index: 2; }
 
-.pp-service-inner > *{
-  position: relative;
-  z-index: 2;
-}
 .pp-service-copy{ display:flex; flex-direction:column; gap: clamp(20px,3vw,40px); }
 .pp-service-title{
   margin:0; color:var(--axl-text-100); font-family:"Urbanist"; font-weight:800;
@@ -360,8 +315,6 @@ body::before{
   margin:0; color:#fff; font-family:"Inter"; font-weight:400;
   font-size: clamp(14px,1.6vw,18px); line-height:1.6;
 }
-
-/* CTA */
 .pp-service-cta{
   display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding:8px 12px 8px clamp(28px,4vw,56px);
@@ -373,27 +326,20 @@ body::before{
 .pp-service-cta:hover{ outline-color:#EE237B; transform:translateY(-2px); }
 .pp-service-cta-badge{ width:24px; height:24px; border-radius:40px; background:#FAFAFB; }
 
-/* Micro-tuning per view molto piccole */
+/* Micro-tuning per view piccole */
 @media (max-width: 560px){
   .pp-navbar{ padding: 10px var(--container-pad); }
   .pp-logo{ width:66px; }
   .pp-services-desc{ font-weight:600; }
-  :root{ --glass-blur: 8px; } /* ancora meno blur su mobile */
+  :root{ --glass-blur: 8px; }
 }
 
 /* ==============================
    PROGETTI (pixel-perfect Figma)
 ============================== */
-
 .pp-projects{
-  width:100%;
-  max-width:1920px;
-  margin:0 auto;
-  padding: clamp(72px,8vw,120px) 0;
-  background:transparent;
+  width:100%; max-width:1920px; margin:0 auto; padding: clamp(72px,8vw,120px) 0; background:transparent;
 }
-
-/* Header: titolo 208px + intro 32px (prima riga italic) */
 .pp-projects-head{
   padding:0 var(--container-pad) clamp(40px,4vw,80px);
   display:flex; align-items:center; justify-content:space-between; gap:40px;
@@ -409,50 +355,33 @@ body::before{
 }
 .pp-projects-desc em{ font-style:italic; font-weight:600; }
 
-/* HERO item: immagine 1920x900 con overlay testo ancorato in basso come in Figma */
 .pp-projects-hero{
-  position:relative; width:100%; height: clamp(520px, 46.9vw, 900px); /* target 900 @1920 */
-  overflow:hidden;
+  position:relative; width:100%; height: clamp(520px, 46.9vw, 900px); overflow:hidden;
 }
-.pp-projects-hero > img{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-}
+.pp-projects-hero > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
-/* Barra overlay: in Figma top=546px -> barra alta 900-546=354px.
-   Qui usiamo clamp per responsive preservando il rapporto */
 .pp-projects-hero-bar{
-  position:absolute; left:0; right:0;
-  bottom:0; /* ancoriamo al bottom: identico visivamente */
-  padding: 40px var(--container-pad);
+  position:absolute; left:0; right:0; bottom:0; padding: 40px var(--container-pad);
   background: rgba(23,23,23,0.75);
   display:flex; flex-direction:column; gap:40px;
 }
 
-/* Divider orizzontale (1px) */
-.pp-divider{
-  align-self:stretch; height:0; border-top:1px solid rgba(255,255,255,1);
-  opacity:.9;
-}
+.pp-divider{ align-self:stretch; height:0; border-top:1px solid rgba(255,255,255,1); opacity:.9; }
 
-/* Blocco split: immagine 1220x600 + pannello 700px */
 .pp-projects-split{
-  display:flex; align-items:stretch; justify-content:flex-start;
-  gap:0; height: clamp(420px, 31.25vw, 600px); /* 600 @1920 */
+  display:flex; align-items:stretch; justify-content:flex-start; gap:0;
+  height: clamp(420px, 31.25vw, 600px);
 }
 .pp-projects-split img{
-  flex:1 1 0; height:100%; object-fit:cover; min-width:0;
-  background:#D9D9D9;
+  flex:1 1 0; height:100%; object-fit:cover; min-width:0; background:#D9D9D9;
 }
 .pp-projects-panel{
   width: min(700px, 100%);
-  padding: 40px 80px; /* top/bottom 40, laterali 80 */
+  padding: 40px 80px;
   display:flex; flex-direction:column; align-items:center; gap:40px;
 }
-.pp-projects-panel .pp-panel-inner{
-  align-self:stretch; display:flex; flex-direction:column; gap:40px;
-}
+.pp-projects-panel .pp-panel-inner{ align-self:stretch; display:flex; flex-direction:column; gap:40px; }
 
-/* Titoli e testi progetto */
 .pp-project-title{
   margin:0; color:#fff; font-family:"Urbanist"; font-weight:800;
   font-size: clamp(32px,5vw,80px); line-height:1.1;
@@ -461,8 +390,6 @@ body::before{
   margin:0; color:#fff; font-family:"Inter"; font-weight:400;
   font-size: clamp(14px,1.6vw,18px); line-height:1.5;
 }
-
-/* CTA outline come in Figma (pink) */
 .pp-project-cta{
   display:inline-flex; align-items:center; gap:16px;
   padding:8px 12px 8px 56px;
@@ -473,23 +400,15 @@ body::before{
   transition:.2s ease;
 }
 .pp-project-cta:hover{ outline-color: var(--axl-pink-300); transform:translateY(-2px); }
-.pp-project-cta-badge{
-  align-self:stretch; padding:12px; border-radius:40px; display:flex; align-items:center; justify-content:center;
-}
+.pp-project-cta-badge{ align-self:stretch; padding:12px; border-radius:40px; display:flex; align-items:center; justify-content:center; }
 
-/* Sezione: spacing stack */
-.pp-projects-stack{
-  display:flex; flex-direction:column; gap:40px; padding:0 var(--container-pad);
-}
+.pp-projects-stack{ display:flex; flex-direction:column; gap:40px; padding:0 var(--container-pad); }
 
-/* Responsive: su <980px lo split diventa colonna */
 @media (max-width: 980px){
   .pp-projects-head{ flex-direction:column; align-items:flex-start; }
   .pp-projects-split{ flex-direction:column; height:auto; }
   .pp-projects-panel{ width:100%; padding: 24px var(--container-pad) 32px; }
 }
-
-/* Coerenza cromatica con Servizi (testo croccante) */
 .pp-projects .pp-project-text{ color: rgba(255,255,255,0.92); }
 
 /* ========== TEAM ========== */
@@ -502,11 +421,8 @@ body::before{
   overflow:hidden;
 }
 
-/* 🚫 Nessun BG su .pp-team */
-.pp-team::before,
-.pp-team::after{
-  content:none !important;
-}
+/* rimuovi qualunque BG di sezione */
+.pp-team::before, .pp-team::after{ content:none !important; }
 
 /* Header */
 .pp-team-head{
@@ -524,68 +440,52 @@ body::before{
 }
 .pp-team-desc em{ font-style:italic; font-weight:600; }
 
-/* ✅ BG SOLO nella grid */
+/* GRID con video di sfondo */
 .pp-team-grid{
-  width:100%;
-  position:relative;
-  display:flex; align-items:stretch; justify-content:space-between;
-  gap:0;
-  z-index:0;
+  width:100%; position:relative; display:flex; align-items:stretch; justify-content:space-between; gap:0; z-index:0; overflow:hidden;
 }
-.pp-team-grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("./assets/gifAxL.mp4") center/cover no-repeat;
-  transform: rotate(180deg);
-  z-index: -2;
-}
+/* disattiva poster statico */
+.pp-team-grid::before{ content:none !important; background:none !important; }
+
+/* overlay sopra il video */
 .pp-team-grid::after{
-  content:"";
-  position:absolute; inset:0;
-  background: rgba(0,0,0,0.12);       /* ≈ come Servizi */
-  -webkit-backdrop-filter: blur(28px) saturate(120%);
-  backdrop-filter: blur(28px) saturate(120%);
+  content:""; position:absolute; inset:0;
+  background: rgba(0,0,0,0.12);
+  -webkit-backdrop-filter: blur(28px) saturate(120%); backdrop-filter: blur(28px) saturate(120%);
   z-index:-1;
 }
 
-/* Colonne */
-.pp-team-col{
-  flex:1 1 0; height:800px; padding:80px;
-  display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.10);
-  -webkit-backdrop-filter:blur(4px) saturate(120%);
-  backdrop-filter:blur(4px) saturate(120%);
-  position:relative;
-  z-index:1;
-  justify-content: flex-start; /* <-- prima era space-between */
-  gap: 50px;                   /* spazio tra foto e stack */
+/* video sotto overlay */
+.pp-team-bg-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transform: rotate(180deg);
+  pointer-events:none; z-index:-2;
 }
 
-/* Divider centrale */
+/* Colonne contenuto */
+.pp-team-col{
+  flex:1 1 0; height:800px; padding:80px;
+  display:flex; flex-direction:column; align-items:flex-start; gap:50px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.10);
+  -webkit-backdrop-filter:blur(4px) saturate(120%); backdrop-filter:blur(4px) saturate(120%);
+  position:relative; z-index:1;
+}
 .pp-team-col:nth-child(2){
   border-left:1px solid rgba(255,255,255,0.22);
   border-right:1px solid rgba(255,255,255,0.22);
 }
 
-/* Foto */
+/* Foto e testi */
 .pp-team-photo{
-  width:100%; flex:1 1 0;
+  flex:0 0 auto; width:100%; height:340px; aspect-ratio:auto;
   background:#D9D9D9; border-radius:8px; overflow:hidden;
 }
-
-/* Stack testi */
-.pp-team-stack{
-  width:100%; display:flex; flex-direction:column;
-  gap:40px;
-  margin-top:50px; /* ✅ Come volevi */
-}
+.pp-team-stack{ width:100%; display:flex; flex-direction:column; gap:40px; margin-top:50px; }
 .pp-team-copy{ display:flex; flex-direction:column; gap:24px; }
 
-/* Tipografia */
 .pp-team-name{
-  margin:0; color:#FAFAFB;
+  margin:0 !important; color:#FAFAFB;
   font-family:"Urbanist"; font-weight:800;
   font-size: clamp(42px,5vw,80px); line-height:1.1;
 }
@@ -610,68 +510,70 @@ body::before{
   font-size:18px; line-height:21.6px;
   transition:transform .2s ease, outline-color .2s ease;
 }
-.pp-team-cta:hover{
-  transform:translateY(-2px);
-  outline-color:var(--axl-pink-600);
-}
-.pp-team-cta-badge{
-  align-self:stretch; padding:12px; border-radius:40px;
-  display:flex; align-items:center; justify-content:center;
-}
-.pp-team-cta-badge .pp-cta-chev{
-  width:16px; height:8px;
-  transform:rotate(135deg) translate(1px,-1px);
-  background:#FAFAFB;
-}
+.pp-team-cta:hover{ transform:translateY(-2px); outline-color:var(--axl-pink-600); }
+.pp-team-cta-badge{ align-self:stretch; padding:12px; border-radius:40px; display:flex; align-items:center; justify-content:center; }
+.pp-cta-chev{ width:16px; height:8px; transform:rotate(135deg) translate(1px,-1px); background:#FAFAFB; }
 
-/* Responsive */
+/* Responsive Team */
 @media (max-width:1200px){
   .pp-team-grid{ flex-direction:column; }
   .pp-team-col{
-    height:auto;
-    padding:48px var(--container-pad);
-    border:none;
+    height:auto; padding:48px var(--container-pad); border:none;
     border-top:1px solid rgba(255,255,255,0.22) !important;
   }
-  .pp-team-col:last-child{
-    border-bottom:1px solid rgba(255,255,255,0.22) !important;
-  }
-  .pp-team-photo{ height:340px; }
+  .pp-team-col:last-child{ border-bottom:1px solid rgba(255,255,255,0.22) !important; }
 }
 @media (max-width:560px){
   .pp-team-photo{ height:260px; }
   .pp-team-cta{ padding-left:40px; }
 }
 
-/* Uniforma la spaziatura: niente margin inline sugli h3 */
-.pp-team-name{ margin-top:0 !important; }
+/* —— FIX: layering servizi (poster → video → overlay → card) —— */
+.pp-services-strip{
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;   /* crea stacking context locale */
+}
 
-/* Lo spazio tra foto e testi resta SOLO qui */
-.pp-team-stack{ margin-top:50px; }
-
-/* Evita margini “fantasma” sul primo elemento del copy */
-.pp-team-copy > *:first-child{ margin-top:0 !important; }
-
-.pp-team-photo{
-  flex: 0 0 auto;      /* non farla crescere */
+/* spacer che dà l’altezza alla strip, resta sotto al video */
+.pp-services-bg{
+  position: relative;
+  z-index: 0;           /* NON negativo */
   width: 100%;
-  aspect-ratio: 16 / 9;/* 👉 rettangolo orizzontale */
-  background:#D9D9D9;
-  border-radius:8px;
-  overflow:hidden;
+  height: clamp(560px, 50vw, 800px);
+  background: url("./assets/bgcard.png") center/cover no-repeat;
 }
 
-/* Se dentro metti un <img>, tienilo cover e senza spazi bianchi */
-.pp-team-photo{
-  width:100%;
-  height:340px;
-  aspect-ratio:auto;
+/* video ruotato, sopra al poster, sotto all’overlay */
+.pp-services-bg-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(180deg);
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Lo spazio tra foto e testi resta qui */
-.pp-team-stack{
-  margin-top:50px;
+/* overlay scuro/blur sopra al video */
+.pp-services-strip::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  backdrop-filter: blur(12px) saturate(110%);
+  z-index: 2;
 }
 
-/* Evita differenze di top dovute a inline style */
-.pp-team-name{ margin-top:0 !important; }
+/* cards/drag track sopra tutto */
+.pp-services-viewport{
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  z-index: 3;
+}

@@ -163,8 +163,10 @@
 
         <!-- Strip 1920×800 con gradient poster -->
         <div class="pp-services-strip">
-            <div class="pp-services-bg"></div>
-
+              <video class="pp-services-bg-video" autoplay muted loop playsinline>
+                <source src="./assets/gifAxL.mp4" type="video/mp4">
+            </video>
+            <div class="pp-services-bg" aria-hidden="true"></div>
             <!-- Track infinito: cloni generati via JS -->
             <div class="pp-services-viewport" aria-label="Servizi" role="listbox">
             <div class="pp-services-track" id="servicesTrack">
@@ -355,50 +357,51 @@
             </p>
         </div>
 
-        <!-- Griglia 3 colonne -->
-        <div class="pp-team-grid">
-            <!-- Colonna 1 -->
-            <article class="pp-team-col">
-            <div class="pp-team-photo"></div>
-            <div class="pp-team-stack">
-                <div class="pp-team-copy">
-                <h3 class="pp-team-name">Lorenzo</h3>
-                <p class="pp-team-role">Full-Stack Developer</p>
-                <p class="pp-team-bio">Dà vita al design con codice solido, pulito e performante. Ogni linea di codice è scritta per durare e funzionare in armonia col design.</p>
-                </div>
-            </div>
-            </article>
+    <div class="pp-team-grid">
 
-            <!-- Colonna 2 (con divider sx+dx) -->
-            <article class="pp-team-col">
-            <div class="pp-team-photo" aria-hidden="true"></div>
-            <div class="pp-team-stack">
-                <div class="pp-team-copy">
-                <h3 class="pp-team-name">Alfredo</h3>
-                <p class="pp-team-role">Graphic &amp; UI/UX Designer</p>
-                <p class="pp-team-bio">
-                    Cura il lato estetico e concettuale dei progetti. Trasforma idee e visioni in
-                    interfacce chiare, coerenti e d’impatto.
-                </p>
-                </div>
-            </div>
-            </article>
+    <!-- ✅ Video come background dell'intera sezione TEAM -->
+    <video class="pp-team-bg-video" autoplay muted loop playsinline poster="./assets/bgcard.png">
+        <source src="./assets/gifAxL.mp4" type="video/mp4">
+    </video>
 
-            <!-- Colonna 3 -->
-            <article class="pp-team-col">
-            <div class="pp-team-photo" aria-hidden="true"></div>
-            <div class="pp-team-stack">
-                <div class="pp-team-copy">
-                <h3  class="pp-team-name">Fabio</h3>
-                <p class="pp-team-role">Social &amp; Digital Strategist</p>
-                <p class="pp-team-bio">
-                    Gestisce la comunicazione e la presenza online del team. Trasforma contenuti e
-                    strategie in connessioni reali con il pubblico.
-                </p>
-                </div>
-            </div>
-            </article>
+    <!-- Colonna 1 -->
+    <article class="pp-team-col">
+        <div class="pp-team-photo"></div>
+        <div class="pp-team-stack">
+        <div class="pp-team-copy">
+            <h3 class="pp-team-name">Lorenzo</h3>
+            <p class="pp-team-role">Full-Stack Developer</p>
+            <p class="pp-team-bio">Dà vita al design con codice solido…</p>
         </div>
+        </div>
+    </article>
+
+    <!-- Colonna 2 -->
+    <article class="pp-team-col">
+        <div class="pp-team-photo"></div>
+        <div class="pp-team-stack">
+        <div class="pp-team-copy">
+            <h3 class="pp-team-name">Alfredo</h3>
+            <p class="pp-team-role">Graphic &amp; UI/UX Designer</p>
+            <p class="pp-team-bio">Cura il lato estetico…</p>
+        </div>
+        </div>
+    </article>
+
+    <!-- Colonna 3 -->
+    <article class="pp-team-col">
+        <div class="pp-team-photo"></div>
+        <div class="pp-team-stack">
+        <div class="pp-team-copy">
+            <h3 class="pp-team-name">Fabio</h3>
+            <p class="pp-team-role">Social &amp; Digital Strategist</p>
+            <p class="pp-team-bio">Gestisce la comunicazione…</p>
+        </div>
+        </div>
+    </article>
+
+    </div>
+
 
         <!-- CTA verso Toolkit -->
         <a href="#stack" class="pp-team-cta">
