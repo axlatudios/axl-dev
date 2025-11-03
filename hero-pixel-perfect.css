@@ -283,7 +283,8 @@ body::before{
   position:relative;
   width:100%;
   height: clamp(560px, 50vw, 800px);
-  background: url("./assets/bgcard.png") center/cover no-repeat; /* unico poster di sezione */
+  background: url("./assets/gifAxL.mp4") center/cover no-repeat; /* unico poster di sezione */
+  transform: rotate(180deg);
 }
 .pp-services-bg::after{
   content:"";
@@ -531,11 +532,13 @@ body::before{
   gap:0;
   z-index:0;
 }
-.pp-team-grid::before{
-  content:"";
-  position:absolute; inset:0;
-  background:url("./assets/bgcard.png") center/cover no-repeat;
-  z-index:-2;
+.pp-team-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./assets/gifAxL.mp4") center/cover no-repeat;
+  transform: rotate(180deg);
+  z-index: -2;
 }
 .pp-team-grid::after{
   content:"";
