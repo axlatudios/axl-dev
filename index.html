@@ -13,25 +13,34 @@
         <!-- Navbar fissa, trasparente, senza blur -->
         <header class="pp-navbar" role="banner">
         <div class="pp-nav-left">
-            <!-- Placeholder Logo dalle dimensioni approssimate nel mock -->
             <div class="pp-logo"></div>
         </div>
-        <nav class="pp-nav" aria-label="Main">
-            <a href="#about" class="pp-nav-item">About AXL</a>
-            <a href="#services" class="pp-nav-item">Servizi</a>
-            <a href="#projects" class="pp-nav-item">Progetti</a>
-            <a href="#team" class="pp-nav-item">Team</a>
-            <a href="#stack" class="pp-nav-item">Strumenti</a>
-            <a href="#contact" class="pp-nav-item pp-contact">
-            <span>Contattaci</span>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.9999 7.05C17.9999 6.78478 17.8946 6.53043 17.707 6.34289C17.5195 6.15536 17.2652 6.05 16.9999 6.05L8.99994 6C8.73472 6 8.48037 6.10536 8.29283 6.29289C8.1053 6.48043 7.99994 6.73478 7.99994 7C7.99994 7.26522 8.1053 7.51957 8.29283 7.70711C8.48037 7.89464 8.73472 8 8.99994 8H14.5599L6.28994 16.29C6.19621 16.383 6.12182 16.4936 6.07105 16.6154C6.02028 16.7373 5.99414 16.868 5.99414 17C5.99414 17.132 6.02028 17.2627 6.07105 17.3846C6.12182 17.5064 6.19621 17.617 6.28994 17.71C6.3829 17.8037 6.4935 17.8781 6.61536 17.9289C6.73722 17.9797 6.86793 18.0058 6.99994 18.0058C7.13195 18.0058 7.26266 17.9797 7.38452 17.9289C7.50638 17.8781 7.61698 17.8037 7.70994 17.71L15.9999 9.42V15C15.9999 15.2652 16.1053 15.5196 16.2928 15.7071C16.4804 15.8946 16.7347 16 16.9999 16C17.2652 16 17.5195 15.8946 17.707 15.7071C17.8946 15.5196 17.9999 15.2652 17.9999 15V7.05Z" fill="#FAFAFB"/>
-                </svg>
-            </a>
-        </nav>
+
+        <!-- Toggle + Burger -->
+        <input type="checkbox" id="ppMenu" class="pp-menu-toggle" aria-label="Apri menù" />
+        <label for="ppMenu" class="pp-burger" aria-expanded="false" aria-controls="primaryNav">
+            <span></span><span></span><span></span>
+        </label>
+
+        <!-- NAV -->
+<nav id="primaryNav" class="pp-nav" aria-label="Main" aria-hidden="true">
+  <a href="#home" class="pp-nav-item" data-close>Home</a>
+  <a href="#about" class="pp-nav-item" data-close>About AXL</a>
+  <a href="#services" class="pp-nav-item" data-close>Servizi</a>
+  <a href="#projects" class="pp-nav-item" data-close>Progetti</a>
+  <a href="#team" class="pp-nav-item" data-close>Team</a>
+  <a href="#stack" class="pp-nav-item" data-close>Strumenti</a>
+  <a href="#contact" class="pp-nav-item pp-contact" data-close>
+    <span>Contattaci</span>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M17.9999 7.05...Z" fill="#FAFAFB"/>
+    </svg>
+  </a>
+</nav>
+
         </header>
 
-        <!-- HERO 1920×940 -->
+        <!-- HERO 1920×1080 -->
         <section class="pp-hero" id="home" style="background-image:url('./assets/hero-placeholder-1920x940.jpg')">
         <!-- Video come nel mock (se presente). Metti il file in ./assets/gifAxL.mp4 -->
         <video class="pp-hero-bg"
@@ -126,15 +135,239 @@
             </div>
 
             <!-- Citazione -->
-            <figure class="pp-quote">
-            <span class="pp-quote-mark">“</span>
-            <blockquote class="pp-quote-text">
-                Design senza codice è incompleto. <br> Codice senza design è senz’anima. <br> Noi uniamo entrambi.
-            </blockquote>
-            <span class="pp-quote-mark pp-quote-mark--end">“</span>
-            </figure>
+<figure class="pp-quote">
+  <span class="pp-quote-mark">“</span>
+  <blockquote class="pp-quote-text">
+    <span>Design senza codice è incompleto.</span>
+    <span>Codice senza design è senz’anima.</span>
+
+    <span class="pp-quote-last">
+      Noi uniamo entrambi.
+      <span class="pp-quote-mark pp-quote-mark--end">“</span>
+    </span>
+  </blockquote>
+</figure>
+        </div>
+        </section>
+
+     <!-- ==================== SERVIZI (Figma-perfect + infinite drag) ==================== -->
+     <section id="services" class="pp-services">
+        <!-- Header riga: titolo 208 + testo 32 (max 750px) -->
+        <div class="pp-services-head">
+            <h2 class="pp-services-title">Servizi</h2>
+            <p class="pp-services-desc">
+            Soluzioni digitali su misura. Dal design allo sviluppo, realizziamo esperienze web
+            pensate per funzionare, crescere e distinguersi.
+            </p>
+        </div>
+
+        <!-- Strip 1920×800 con gradient poster -->
+        <div class="pp-services-strip">
+            <div class="pp-services-bg"></div>
+
+            <!-- Track infinito: cloni generati via JS -->
+            <div class="pp-services-viewport" aria-label="Servizi" role="listbox">
+            <div class="pp-services-track" id="servicesTrack">
+                <!-- CARD 1 -->
+                <article class="pp-service" role="option" aria-label="Web Design">
+                <div class="pp-service-inner">
+                    <header class="pp-service-copy">
+                    <h3 class="pp-service-title">Web Design</h3>
+                    <p class="pp-service-text">
+                        Creiamo interfacce chiare, coerenti e visivamente d’impatto. Ogni layout nasce dall’incontro
+                        tra estetica e funzionalità, con attenzione a dettagli, leggibilità e ritmo visivo. Il nostro
+                        obiettivo è semplice: rendere il design non solo bello, ma anche utile e memorabile.
+                    </p>
+                    </header>
+                    <a href="#contact" class="pp-service-cta">
+                    <span>SCopri di più</span>
+                    <span class="pp-service-cta-badge" aria-hidden="true"></span>
+                    </a>
+                </div>
+                </article>
+
+                <!-- CARD 2 -->
+                <article class="pp-service" role="option" aria-label="Sviluppo web">
+                <div class="pp-service-inner">
+                    <header class="pp-service-copy">
+                    <h3 class="pp-service-title">Sviluppo web</h3>
+                    <p class="pp-service-text">
+                        Diamo forma al lato tecnico delle idee. Realizziamo siti e web app con codice pulito,
+                        performante e scalabile, curando ogni dettaglio dell’esperienza utente. Ogni riga di
+                        codice è scritta per durare e garantire risultati affidabili.
+                    </p>
+                    </header>
+                    <a href="#contact" class="pp-service-cta">
+                    <span>SCopri di più</span>
+                    <span class="pp-service-cta-badge" aria-hidden="true"></span>
+                    </a>
+                </div>
+                </article>
+
+                <!-- CARD 3 -->
+                <article class="pp-service" role="option" aria-label="Siti Web Corporate">
+                <div class="pp-service-inner">
+                    <header class="pp-service-copy">
+                    <h3 class="pp-service-title">Siti Web Corporate</h3>
+                    <p class="pp-service-text">
+                        Siti professionali che raccontano il valore e l’identità del brand: strutture solide,
+                        navigazione intuitiva e contenuti che comunicano fiducia e competenza.
+                    </p>
+                    </header>
+                    <a href="#contact" class="pp-service-cta">
+                    <span>SCopri di più</span>
+                    <span class="pp-service-cta-badge" aria-hidden="true"></span>
+                    </a>
+                </div>
+                </article>
+
+                <!-- CARD 4 -->
+                <article class="pp-service" role="option" aria-label="Landing Page">
+                <div class="pp-service-inner">
+                    <header class="pp-service-copy">
+                    <h3 class="pp-service-title">Landing Page</h3>
+                    <p class="pp-service-text">
+                        Pagine leggere, veloci e pensate per convertire. Ogni sezione è calibrata per guidare
+                        l’utente, bilanciando design e strategia per colpire in pochi secondi.
+                    </p>
+                    </header>
+                    <a href="#contact" class="pp-service-cta">
+                    <span>SCopri di più</span>
+                    <span class="pp-service-cta-badge" aria-hidden="true"></span>
+                    </a>
+                </div>
+                </article>
+
+                <!-- CARD 5 -->
+                <article class="pp-service" role="option" aria-label="Restyling Sito Web">
+                <div class="pp-service-inner">
+                    <header class="pp-service-copy">
+                    <h3 class="pp-service-title">Restyling Sito Web</h3>
+                    <p class="pp-service-text">
+                        Riprogettiamo struttura, design e performance per un’esperienza moderna e coerente con la
+                        tua identità: un nuovo inizio costruito su basi solide.
+                    </p>
+                    </header>
+                    <a href="#contact" class="pp-service-cta">
+                    <span>SCopri di più</span>
+                    <span class="pp-service-cta-badge" aria-hidden="true"></span>
+                    </a>
+                </div>
+                </article>
+            </div>
+            </div>
         </div>
         </section>
     </div>
+
+
+
+    <script>
+    (function(){
+    const track = document.getElementById('servicesTrack');
+    const viewport = track.parentElement;
+
+    // calcolo dimensioni card dinamiche
+    let cards = Array.from(track.children);
+    let BASE_COUNT = cards.length;
+    function cardW(){ return cards[0].getBoundingClientRect().width; }
+
+    // Cloni per loop infinito
+    function populateClones(){
+        const fragStart = document.createDocumentFragment();
+        const fragEnd   = document.createDocumentFragment();
+        cards.forEach(c => fragEnd.appendChild(c.cloneNode(true)));
+        [...cards].reverse().forEach(c => fragStart.appendChild(c.cloneNode(true)));
+        track.insertBefore(fragStart, track.firstChild);
+        track.appendChild(fragEnd);
+    }
+    populateClones();
+
+    // Stato
+    let startX = 0, currentX = 0, prevX = 0, isDown = false;
+    let translate = 0, TOTAL = 0, LEFT_LIMIT = 0, RIGHT_LIMIT = 0;
+
+    function recalc(){
+        const CW = cardW();
+        const triples = BASE_COUNT * 3;
+        TOTAL = CW * triples;
+        LEFT_LIMIT  = -TOTAL + (CW * BASE_COUNT);
+        RIGHT_LIMIT = 0 - (CW * BASE_COUNT);
+        translate   = RIGHT_LIMIT; // centrato sui cloni di sinistra
+        track.style.transform = `translateX(${translate}px)`;
+    }
+    recalc();
+
+    // Drag
+    function wrap(){
+        if (translate < LEFT_LIMIT)  translate += cardW() * BASE_COUNT;
+        if (translate > RIGHT_LIMIT) translate -= cardW() * BASE_COUNT;
+    }
+    function onDown(e){
+        isDown = true;
+        viewport.classList.add('dragging');
+        document.body.style.userSelect = 'none';
+        startX = (e.touches ? e.touches[0].clientX : e.clientX);
+        prevX  = startX;
+    }
+    function onMove(e){
+        if(!isDown) return;
+        currentX = (e.touches ? e.touches[0].clientX : e.clientX);
+        const dx = currentX - prevX;
+        prevX = currentX;
+        translate += dx;
+        wrap();
+        track.style.transform = `translateX(${translate}px)`;
+        e.preventDefault(); // blocca lo scroll orizzontale mentre trascini
+    }
+    function onUp(){
+        isDown = false;
+        viewport.classList.remove('dragging');
+        document.body.style.userSelect = '';
+    }
+
+    viewport.addEventListener('mousedown', onDown);
+    viewport.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+
+    viewport.addEventListener('touchstart', onDown, {passive:false});
+    viewport.addEventListener('touchmove',  onMove, {passive:false});
+    window.addEventListener('touchend', onUp);
+
+    viewport.addEventListener('dragstart', e => e.preventDefault());
+
+    // Reflow al resize / orientation
+    let rid;
+    window.addEventListener('resize', () => {
+        cancelAnimationFrame(rid);
+        rid = requestAnimationFrame(recalc);
+    });
+    })();
+    </script>
+
+    <script>
+    (function(){
+    const cb = document.getElementById('ppMenu');
+    const burger = document.querySelector('label.pp-burger');
+    const nav = document.getElementById('primaryNav');
+    const links = nav.querySelectorAll('[data-close]');
+
+    function syncAria(){
+        const open = cb.checked;
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        nav.setAttribute('aria-hidden', open ? 'false' : 'true');
+        document.documentElement.style.overflow = open ? 'hidden' : '';
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+    cb.addEventListener('change', syncAria);
+    syncAria();
+
+    links.forEach(a => a.addEventListener('click', () => {
+        cb.checked = false;
+        syncAria();
+    }));
+    })();
+</script>
+
     </body>
     </html>

@@ -1,8 +1,8 @@
 /* =============================
-   AXL Studios — Responsive Pixel-Perfect
+   AXL Studios — Pixel-Perfect (responsive)
 ============================= */
 
-/* Fonts */
+/* ========== Fonts ========== */
 @font-face{
   font-family:"Urbanist";
   src:url("./assets/fonts/Urbanist-VariableFont_wght.ttf") format("truetype");
@@ -24,7 +24,7 @@
   font-weight:100 900; font-style:italic; font-display:swap;
 }
 
-/* Palette */
+/* ========== Palette ========== */
 :root{
   --axl-pink-300:#F288B7;
   --axl-pink-500:#F05FA0;
@@ -33,37 +33,47 @@
   --axl-bg-900:#151415;
   --axl-text-100:#FAFAFB;
   --axl-text-400:#A9A8A8;
+
+  /* tokens responsive utili */
+  --container-pad: clamp(16px, 4vw, 80px);
+
+  /* glass tuning */
+  --glass-blur: 10px;   /* meno sfocato */
+  --glass-sat:  140%;
 }
 
-/* Reset */
+/* ========== Reset ========== */
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
-html,body{ overflow-x:clip; }
+html,body{ height:100%; overflow-x:clip; }
 body{
   margin:0;
-  background: url("./assets/bgsticky.png") center/cover fixed, var(--axl-bg-900);
   color:var(--axl-text-100);
   font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background: var(--axl-bg-900);
 }
 
-/* Wrapper max 1920, fluido */
+/* Sticky background globale (ovunque tranne la HERO) */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  z-index:-1; pointer-events:none;
+  background: var(--axl-bg-900) url("./assets/bgsticky.png") center/cover no-repeat;
+}
+
+/* Wrapper */
 .pp-wrapper{
-  width:100%;
-  max-width:1920px;
-  margin:0 auto;
-  position:relative;
-  background: url("./assets/bgsticky.png") center/cover fixed, var(--axl-bg-900);
+  width:100%; max-width:1920px; margin:0 auto; position:relative; background:transparent;
 }
 
-/* ===== NAVBAR ===== */
+/* ========== NAVBAR ========== */
 .pp-navbar{
   position:fixed; top:0; left:50%; transform:translateX(-50%);
   width:100%; max-width:1920px;
-  padding: clamp(16px,2.8vw,40px) clamp(20px,4.2vw,80px);
+  padding: clamp(12px,2.8vw,40px) var(--container-pad);
   display:flex; align-items:center; justify-content:space-between;
   background:rgba(21,20,21,0.12);
-  -webkit-backdrop-filter: blur(8px) saturate(120%); backdrop-filter: blur(8px) saturate(120%);
-  z-index:10;
+  -webkit-backdrop-filter:blur(8px) saturate(120%); backdrop-filter:blur(8px) saturate(120%);
+  z-index:100;
 }
 .pp-navbar::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
@@ -71,246 +81,302 @@ body{
   pointer-events:none;
 }
 .pp-logo{ width:78px; height:32px; background:url("./assets/logo.svg") center/contain no-repeat; }
-.pp-nav{ display:flex; align-items:center; gap: clamp(10px,1.6vw,24px); }
+
+/* Nav desktop */
+.pp-nav{
+  display:flex; align-items:center; gap:clamp(10px,1.6vw,24px);
+}
 .pp-nav-item{
-  color:#FAFAFB; font-family:"Urbanist";
+  color:#FAFAFB; font-family:"Urbanist"; font-weight:800;
   font-size: clamp(12px,1.1vw,18px);
-  font-weight:800; text-transform:uppercase; line-height:1.2; letter-spacing:1px; text-decoration:none;
+  text-transform:uppercase; line-height:1.2; letter-spacing:1px; text-decoration:none;
 }
 .pp-contact{ display:inline-flex; align-items:center; gap:4px; }
 .pp-contact svg{ flex:0 0 auto; }
 
-/* Burger (mobile) */
-.pp-menu-toggle{ display:none; }
+/* Hamburger logic */
+.pp-menu-toggle{ position:absolute; opacity:0; pointer-events:none; } /* input nascosto */
 .pp-burger{
-  display:none; width:15px; height:8.33px; position:relative; cursor:pointer;
+  display:none; width:22px; height:16px; position:relative; cursor:pointer; margin-left:12px;
 }
 .pp-burger span{
-  position:absolute; left:0; right:0; height:3px; background:#FAFAFB; border-radius:2px; transition:.25s;
+  position:absolute; left:0; width:100%; height:2px; background:#FAFAFB; border-radius:2px;
+  transition:transform .22s ease, opacity .18s ease; transform-origin:center;
 }
 .pp-burger span:nth-child(1){ top:0; }
-.pp-burger span:nth-child(2){ top:calc(50% - 1.5px); }
+.pp-burger span:nth-child(2){ top:calc(50% - 1px); }
 .pp-burger span:nth-child(3){ bottom:0; }
 
-/* ===== HERO ===== */
+/* Stato aperto */
+.pp-menu-toggle:checked + label.pp-burger span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.pp-menu-toggle:checked + label.pp-burger span:nth-child(2){ opacity:0; transform:scaleX(.5); }
+.pp-menu-toggle:checked + label.pp-burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+/* Nav mobile-panel */
+@media (max-width: 1024px){
+  .pp-burger{ display:block; z-index:102; -webkit-tap-highlight-color:transparent; }
+
+  .pp-nav{
+    position:fixed; inset:auto 0 0 0; top:64px; /* sotto la navbar */
+    display:flex; flex-direction:column; align-items:flex-start;
+    gap:16px; padding:16px var(--container-pad) 24px;
+    background:rgba(21,20,21,0.92);
+    -webkit-backdrop-filter:blur(10px) saturate(120%); backdrop-filter:blur(10px) saturate(120%);
+    border-top:1px solid rgba(250,250,251,.08);
+    z-index:101;
+
+    /* stato chiuso */
+    max-height:0;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform: translateY(-6px);
+    transition: max-height .25s ease, opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
+  }
+
+  /* voci tappabili */
+  .pp-nav-item{
+    display:block;
+    font-size: clamp(18px, 4.6vw, 22px);
+    font-weight: 800;
+    letter-spacing: .5px;
+    padding: 10px 0;
+  }
+
+  /* stato aperto */
+  .pp-menu-toggle:checked ~ nav.pp-nav{
+    max-height:70vh;
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform: translateY(0);
+    transition: max-height .25s ease, opacity .22s ease, transform .22s ease, visibility 0s;
+  }
+
+  /* Burger in X (duplicato per specificità mobile) */
+  .pp-menu-toggle:checked + label.pp-burger span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  .pp-menu-toggle:checked + label.pp-burger span:nth-child(2){ opacity:0; transform: scaleX(.5); }
+  .pp-menu-toggle:checked + label.pp-burger span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+}
+
+/* (modern) blocca scroll quando menu aperto */
+@supports(selector(body:has(#ppMenu:checked))){
+  body:has(#ppMenu:checked){ overflow:hidden; }
+}
+
+/* ========== HERO ========== */
 .pp-hero{
-  position:relative;
-  width:100%; max-width:1920px;
-  /* Usa aspect-ratio, con fallback height min */
-  aspect-ratio: 16 / 9;
-  min-height: 560px; /* evita hero troppo bassa su mobile landscape */
-  overflow:hidden;
+  position:relative; width:100%; max-width:1920px; aspect-ratio:16/9; min-height:560px; overflow:hidden;
   background-size:cover; background-position:center;
 }
-.pp-hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-.pp-hero-overlay{ position:absolute; inset:0; z-index:1; background:rgba(21,20,21,0.18); -webkit-backdrop-filter: blur(14px) saturate(95%); backdrop-filter: blur(14px) saturate(95%); }
+.pp-hero::before{ content:""; position:absolute; inset:0; background:var(--axl-bg-900); z-index:0; }
+.pp-hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; }
+.pp-hero-overlay{ position:absolute; inset:0; z-index:2; background:rgba(21,20,21,0.18); -webkit-backdrop-filter:blur(14px) saturate(95%); backdrop-filter:blur(14px) saturate(95%); }
 .pp-hero-overlay::before{
   content:""; position:absolute; inset:0; pointer-events:none;
-  background: radial-gradient(70% 75% at 50% 38%, rgba(21,20,21,0) 0%, rgba(21,20,21,0.22) 100%);
+  background:radial-gradient(70% 75% at 50% 38%, rgba(21,20,21,0) 0%, rgba(21,20,21,0.22) 100%);
 }
 .pp-hero-inner{
-  position:absolute; inset:0;
-  padding: clamp(48px,7vw,120px) clamp(20px,8vw,320px);
-  display:flex; flex-direction:column; justify-content:center; align-items:center; gap: clamp(20px,3vw,56px);
-  z-index:2;
+  position:absolute; inset:0; padding: clamp(40px,7vw,120px) clamp(20px,8vw,320px);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; gap: clamp(20px,3vw,56px); z-index:3;
 }
 .pp-hero-stack{ align-self:stretch; display:flex; flex-direction:column; align-items:center; gap: clamp(16px,2.4vw,32px); }
 
-/* Titoli Hero */
 .pp-title{ margin:0; text-align:center; font-size:0; }
-.pp-title-axl,
-.pp-title-strong{ color:#FAFAFB; font-family:"Urbanist"; font-weight:800; line-height:1.1; display:inline-block; font-size: clamp(42px,6vw,104px); }
+.pp-title-axl,.pp-title-strong{
+  color:#FAFAFB; font-family:"Urbanist"; font-weight:800; line-height:1.1; display:inline-block;
+  font-size: clamp(38px,6vw,104px);
+}
 .pp-title-axl{ color:var(--axl-pink-300); }
-.pp-title-where500{ color:#FAFAFB; font-family:"Urbanist"; font-weight:500; line-height:1.1; display:inline-block; font-size: clamp(42px,6vw,104px); }
-.pp-title span + span{ margin-left: .25em; }
+.pp-title-where500{
+  color:#FAFAFB; font-family:"Urbanist"; font-weight:500; line-height:1.1; display:inline-block;
+  font-size: clamp(38px,6vw,104px);
+}
+.pp-title span + span{ margin-left:.25em; }
 .pp-subtitle{
   align-self:stretch; text-align:center; color:#FAFAFB;
-  font-size: clamp(16px,2vw,32px); font-family:"Urbanist"; font-weight:600; line-height:1.2; margin:0;
+  font-size: clamp(16px,2vw,32px); font-family:"Urbanist"; font-weight:600; line-height:1.25; margin:0;
 }
 
-/* CTA */
 .pp-cta{
-  display:inline-flex; align-items:center; gap:20px;
-  padding:10px 30px 10px 50px; min-width:220px; height:52px; justify-content:center;
-  border-radius:40px; background:rgba(255,255,255,0.10);
-  -webkit-backdrop-filter: blur(12px) saturate(120%); backdrop-filter: blur(12px) saturate(120%);
+  display:inline-flex; align-items:center; gap:20px; padding:10px 30px 10px 50px;
+  min-width:220px; height:52px; justify-content:center; border-radius:40px;
+  background:rgba(255,255,255,0.10);
+  -webkit-backdrop-filter:blur(12px) saturate(120%); backdrop-filter:blur(12px) saturate(120%);
   border:2px solid rgba(242,135,183,0.55);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(238,35,123,0.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 20px rgba(238,35,123,0.16);
   text-decoration:none; transition:.28s;
 }
-.pp-cta-text{ color:#fff; font-size: clamp(13px,1.2vw,18px); font-family:"Urbanist"; font-weight:800; text-transform:uppercase; letter-spacing:1px; white-space:nowrap; }
+.pp-cta-text{ color:#fff; font-size:clamp(12px,1.2vw,18px); font-family:"Urbanist"; font-weight:800; text-transform:uppercase; letter-spacing:1px; white-space:nowrap; }
 .pp-cta-badge{ width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:2px solid rgba(250,250,251,0.60); background:rgba(255,255,255,0.12); transition:.28s; }
-.pp-cta:hover{ background:rgba(255,255,255,0.16); border-color:rgba(242,135,183,0.80); box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 12px 26px rgba(238,35,123,0.22); transform:translateY(-3px); }
-.pp-arrow-down{ width:18px; height:18px; fill:#FAFAFB; transition:transform .28s; transform: translateY(-2px); }
-.pp-cta:hover .pp-arrow-down{ transform: translateY(3px); }
+.pp-arrow-down{ width:18px; height:18px; fill:#FAFAFB; transition:transform .28s; transform:translateY(-2px); }
+.pp-cta:hover{ background:rgba(255,255,255,0.16); border-color:rgba(242,135,183,0.80); box-shadow:inset 0 1px 0 rgba(255,255,255,0.16), 0 12px 26px rgba(238,35,123,0.22); transform:translateY(-3px); }
+.pp-cta:hover .pp-arrow-down{ transform:translateY(3px); }
 
-/* ===== STORY / ABOUT ===== */
-.pp-story{
-  position:relative; width:100%;
-  background-size:cover; background-position:center;
-  padding: clamp(64px,8vw,120px) clamp(20px,4.2vw,80px);
-  display:flex; justify-content:flex-end;
-}
-.pp-story-inner{
-  width:100%; max-width:1920px; margin:0 auto;
-  display:flex; flex-direction:column; gap: clamp(40px,5vw,80px);
-}
-/* Titolo */
+/* ========== STORY / ABOUT ========== */
+.pp-story{ position:relative; width:100%; padding:clamp(48px,8vw,120px) var(--container-pad); display:flex; justify-content:flex-end; background:transparent; }
+.pp-story-inner{ width:100%; max-width:1920px; margin:0 auto; display:flex; flex-direction:column; gap: clamp(32px,5vw,80px); }
+
 .pp-story-title{ margin:0; font-size:0; }
-.pp-story-title-plain,
-.pp-story-title-italic,
-.pp-story-title-accent{
-  display:inline-block; font-family:"Urbanist"; font-weight:800; line-height:1.1;
-  font-size: clamp(32px,5vw,80px); color:var(--axl-text-100);
+.pp-story-title-plain,.pp-story-title-italic,.pp-story-title-accent{
+  display:inline-block; font-family:"Urbanist"; font-weight:800; line-height:1.1; font-size: clamp(28px,5vw,80px); color:var(--axl-text-100);
 }
-.pp-story-title-italic{ font-style:italic; font-size: clamp(36px,5.8vw,92px); letter-spacing:-0.5px; }
+.pp-story-title-italic{ font-style:italic; font-size: clamp(32px,5.8vw,92px); letter-spacing:-0.5px; }
 .pp-story-title-accent{ color:var(--axl-pink-300); }
 .pp-story-title span + span{ margin-left:.15em; }
-/* Sottotitolo */
+
 .pp-story-subtitle{
   margin:0; color:var(--axl-text-100); font-family:"Urbanist";
-  font-weight:700; font-size: clamp(18px,3vw,48px); line-height:1.25;
-}
-/* 3 colonne → 2 → 1 */
-.pp-story-grid{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: clamp(24px,5vw,80px);
-  padding: 0 clamp(0px,4.2vw,80px);
-}
-@media (max-width: 1200px){
-  .pp-story-grid{ grid-template-columns: repeat(2,1fr); }
-}
-@media (max-width: 800px){
-  .pp-story-grid{ grid-template-columns: 1fr; padding:0; }
-}
-.pp-story-col-title{
-  margin:0 0 12px 0; color:#fff; font-family:"Urbanist";
-  font-weight:600; font-size: clamp(20px,2.2vw,32px); line-height:1.2;
-}
-.pp-story-col-text{
-  margin:0; color:var(--axl-text-100); font-family:"Inter";
-  font-weight:400; font-size: clamp(14px,1.2vw,18px); line-height:1.6;
+  font-weight:700; font-size: clamp(16px,3vw,48px); line-height:1.25;
 }
 
-/* Citazione */
-.pp-quote{
-  display:grid; grid-template-columns:auto 1fr auto; align-items:start; gap: clamp(16px,3vw,40px);
+.pp-story-grid{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap: clamp(20px,5vw,80px); padding: 0 var(--container-pad);
 }
-.pp-quote-mark{
+@media (max-width:1200px){ .pp-story-grid{ grid-template-columns:repeat(2,1fr); padding:0; } }
+@media (max-width:800px){ .pp-story-grid{ grid-template-columns:1fr; } }
+
+.pp-story-col-title{ margin:0 0 10px; color:#fff; font-family:"Urbanist"; font-weight:600; font-size: clamp(18px,2.2vw,32px); line-height:1.2; }
+.pp-story-col-text{ margin:0; color:var(--axl-text-100); font-family:"Inter"; font-weight:400; font-size: clamp(14px,1.2vw,18px); line-height:1.6; }
+
+/* ===== Quote ===== */
+.pp-quote{
+  display:grid; grid-template-columns:auto 1fr;
+  gap: clamp(12px,1.2vw,24px); align-items:start;
+}
+.pp-quote .pp-quote-mark{
   color:var(--axl-pink-300); font-family:"Urbanist"; font-weight:700;
-  font-size: clamp(56px,6vw,104px); line-height:1.1;
+  font-size:clamp(56px,6vw,104px); line-height:1.1;
 }
 .pp-quote-text{
   margin:0; color:var(--axl-text-100); font-family:"Urbanist"; font-style:italic; font-weight:700;
-  font-size: clamp(20px,3.2vw,48px); line-height: clamp(28px,4vw,60px);
+  font-size:clamp(20px,3.2vw,48px); line-height:clamp(28px,4vw,60px);
 }
-.pp-quote-text > span{ display:block; margin-bottom: clamp(6px,1vw,12px); }
-.pp-quote-text > span:last-child{ margin-bottom:0; }
-.pp-quote-mark--end {
-  display: inline-block;
-  transform: rotate(180deg);
-  margin-left: 10px; /* nuova distanza più naturale */
-  margin-bottom: 0;
-}
-
-
-/* === BURGER ultra-compatto 15 × 8.33px === */
-@media (max-width: 980px){
-
-  .pp-burger{
-    display:block;
-    width:15px;
-    height:8.33px;
-    position:relative;
-    cursor:pointer;
-    z-index:12;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .pp-burger span{
-    position:absolute;
-    left:0;
-    width:100%;
-    height:1.5px; /* linee molto sottili */
-    background:#FAFAFB;
-    border-radius:1px;
-    transition:transform .22s ease, opacity .18s ease;
-    transform-origin:center;
-  }
-
-  .pp-burger span:nth-child(1){ top:0; }
-  .pp-burger span:nth-child(2){ top:calc(50% - .75px); }
-  .pp-burger span:nth-child(3){ bottom:0; }
-
-  /* NAV mobile */
-  .pp-nav{
-    position:absolute;
-    top:100%; left:0; right:0;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:14px;
-    padding:14px clamp(20px,4vw,40px) 18px;
-    background:rgba(21,20,21,0.9);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .25s ease;
-    z-index:11;
-  }
-
-  .pp-menu-toggle:checked ~ .pp-nav{
-    max-height:60vh;
-  }
-
-  /* Animazione X corretta: incrocio al centro */
-  .pp-menu-toggle:checked + .pp-burger span:nth-child(1){
-    transform: translateY(3.91px) rotate(45deg);
-  }
-  .pp-menu-toggle:checked + .pp-burger span:nth-child(2){
-    opacity:0;
-    transform:scaleX(0.4);
-  }
-  .pp-menu-toggle:checked + .pp-burger span:nth-child(3){
-    transform: translateY(-3.91px) rotate(-45deg);
-  }
-}
-
-/* ===== Mobile background fixed fallback (iOS) ===== */
-@media (max-width: 1024px){
-  body{ background-attachment: scroll; }
-  .pp-wrapper{ background-attachment: scroll; }
-}
-
-/* Metti gli span a blocco, tranne l'ultima riga e la virgoletta finale */
-.pp-quote-text > span:not(.pp-quote-mark--end){
-  display: block;
-  margin-bottom: clamp(6px,1vw,12px);
-}
-
-/* L'ULTIMA riga di testo (cioè la penultima span) deve stare inline con la virgoletta */
-.pp-quote-text > span:nth-last-of-type(2){
-  display: inline;
-  margin-bottom: 0;
-}
-
-/* Virgoletta finale: inline con la riga di testo e vicina */
-.pp-quote-text > .pp-quote-mark--end{
-  display: inline-block !important;
-  transform: rotate(180deg);
-  margin-left: 315px;   /* avvicina la virgoletta */
-  margin-bottom: 0;
-  vertical-align: baseline;
-}
-
-/* === Posizionamento virgoletta finale separata === */
+.pp-quote-text > span{ display:block; margin-bottom: clamp(10px,1vw,16px); }
+.pp-quote-text > span:last-child{ margin-bottom:0; position:relative; display:block; }
 .pp-quote-mark--end{
-  display: inline-block;
-  transform: rotate(180deg) translateY(-0.8em); /* 0.8 → una riga circa */
-  margin-right: 710px; 
-  line-height: 1;
-  vertical-align: bottom;
+  position:absolute; transform:rotate(180deg);
+  left: 790px; bottom:0; margin:0;
 }
-/* Fine */
+
+/* ========== SERVIZI (Figma + drag infinito) ========== */
+.pp-services{
+  width:100%; max-width:1920px; margin:0 auto; padding: clamp(72px,8vw,120px) 0; background:transparent;
+  
+}
+.pp-services-head{
+  padding:0 var(--container-pad) clamp(40px,4vw,80px);
+  display:flex; align-items:center; justify-content:space-between; gap:40px;
+}
+.pp-services-title{
+  margin:0; color:#fff; font-family:"Urbanist"; font-weight:600;
+  font-size: clamp(72px,12vw,208px); line-height: 0.95;
+}
+.pp-services-desc{
+  margin:0; max-width:750px; color:#fff; font-family:"Urbanist"; font-weight:600;
+  font-size: clamp(18px,2.4vw,32px); line-height: 1.2;
+}
+
+/* Rails */
+.pp-services-strip{ width:100%; position:relative; }
+.pp-services-bg{
+  position:relative;
+  width:100%;
+  height: clamp(560px, 50vw, 800px);
+  background: url("./assets/bgcard.png") center/cover no-repeat; /* unico poster di sezione */
+}
+.pp-services-bg::after{
+  content:"";
+  position:absolute; inset:0;
+  background: rgba(0,0,0,0.12); /* 0.10–0.18 */
+  pointer-events:none;
+}
+.pp-services-viewport{
+  position:absolute; inset:0; height:100%; overflow:hidden; cursor:grab;
+  touch-action: pan-y; /* consenti scroll verticale naturale */
+}
+.pp-services-viewport:active{ cursor:grabbing; }
+.pp-services-track{ position:absolute; top:0; left:0; height:100%; display:flex; will-change:transform; }
+
+/* Card responsive (larghezza dinamica) */
+.pp-service{
+  flex: 0 0 var(--card-w, 600px);
+  width: var(--card-w, 600px);
+  height: 100%;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+  position:relative;
+}
+.pp-service + .pp-service::before{
+  content:""; position:absolute; top:5%; bottom:5%; left:0; width:2px;
+  background:linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 35%, rgba(255,255,255,0.22) 65%, rgba(255,255,255,0) 100%);
+  pointer-events:none; z-index:2;
+}
+
+/* Card padding e typo */
+.pp-service-inner{
+  position: relative;
+  width:100%; height:100%;
+  padding: clamp(32px,6vw,80px);
+  display:flex; flex-direction:column; justify-content:space-between;
+
+  /* glass meno sfocato */
+  background: rgba(255,255,255,0.10);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 8px 28px rgba(0,0,0,0.32);
+
+  isolation: isolate;
+  overflow: hidden;
+}
+.pp-service-inner::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background: rgba(0,0,0,0.22);   /* 0.18–0.28 per contrasto */
+  z-index: 0;
+  pointer-events:none;
+}
+/* rimosso il poster per-card */
+.pp-service-inner::after{
+  content:none !important;
+}
+
+.pp-service-inner > *{
+  position: relative;
+  z-index: 2;
+}
+.pp-service-copy{ display:flex; flex-direction:column; gap: clamp(20px,3vw,40px); }
+.pp-service-title{
+  margin:0; color:var(--axl-text-100); font-family:"Urbanist"; font-weight:800;
+  font-size: clamp(34px,6vw,80px); line-height:1.1;
+}
+.pp-service-text{
+  margin:0; color:#fff; font-family:"Inter"; font-weight:400;
+  font-size: clamp(14px,1.6vw,18px); line-height:1.6;
+}
+
+/* CTA */
+.pp-service-cta{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:8px 12px 8px clamp(28px,4vw,56px);
+  border-radius:32px; text-decoration:none; background:transparent;
+  outline:1px solid var(--axl-pink-300); outline-offset:-1px;
+  color:#fff; font-family:"Urbanist"; font-weight:800; font-size: clamp(14px,1.6vw,18px);
+  line-height:1.2; letter-spacing:1px; text-transform:uppercase; transition:.25s ease;
+}
+.pp-service-cta:hover{ outline-color:#EE237B; transform:translateY(-2px); }
+.pp-service-cta-badge{ width:24px; height:24px; border-radius:40px; background:#FAFAFB; }
+
+/* Micro-tuning per view molto piccole */
+@media (max-width: 560px){
+  .pp-navbar{ padding: 10px var(--container-pad); }
+  .pp-logo{ width:66px; }
+  .pp-services-desc{ font-weight:600; }
+  :root{ --glass-blur: 8px; } /* ancora meno blur su mobile */
+}
