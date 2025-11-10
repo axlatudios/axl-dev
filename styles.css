@@ -660,10 +660,7 @@ body::before{
   justify-items: start;
 }
 
-/* Variante wide (es. Social & Strategy) */
-.pp-toolkit-icons--wide {
-  grid-template-columns: repeat(7, minmax(var(--pp-icon-size), 1fr));
-}
+
 
 .pp-toolkit-icons img {
   width: var(--pp-icon-size);
