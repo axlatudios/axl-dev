@@ -649,15 +649,15 @@ body::before{
 /* Icone */
 .pp-toolkit-icons{
   /* tokens */
-  --pp-icon-size: 48px;               /* base desktop */
-  --pp-icon-gap-x: clamp(18px, 2vw, 28px);
-  --pp-icon-gap-y: clamp(16px, 1.8vw, 24px);
+  --pp-icon-size: 60px;               /* base desktop */
+  --pp-icon-gap-x: clamp(22px, 2.4vw, 32px);
+  --pp-icon-gap-y: clamp(18px, 2vw, 28px);
 
   display: grid;
   grid-template-columns: repeat(8, minmax(var(--pp-icon-size), 1fr));
   gap: var(--pp-icon-gap-y) var(--pp-icon-gap-x);
   align-items: center;
-  justify-items: start;               /* allinea a sinistra la cella */
+  justify-items: start;
 }
 .pp-toolkit-icons img{
   width: var(--pp-icon-size);
