@@ -647,11 +647,11 @@ body::before{
 }
 
 /* Icone */
-.pp-toolkit-icons{
+.pp-toolkit-icons {
   /* tokens */
-  --pp-icon-size: 60px;               /* base desktop */
-  --pp-icon-gap-x: clamp(22px, 2.4vw, 32px);
-  --pp-icon-gap-y: clamp(18px, 2vw, 28px);
+  --pp-icon-size: 60px;               /* dimensione icone */
+  --pp-icon-gap-x: clamp(28px, 3vw, 42px);  /* più distanziamento orizzontale */
+  --pp-icon-gap-y: clamp(22px, 2.4vw, 36px);/* più distanziamento verticale */
 
   display: grid;
   grid-template-columns: repeat(8, minmax(var(--pp-icon-size), 1fr));
@@ -659,51 +659,53 @@ body::before{
   align-items: center;
   justify-items: start;
 }
-.pp-toolkit-icons img{
+
+/* Variante wide (es. Social & Strategy) */
+.pp-toolkit-icons--wide {
+  grid-template-columns: repeat(7, minmax(var(--pp-icon-size), 1fr));
+}
+
+.pp-toolkit-icons img {
   width: var(--pp-icon-size);
   height: var(--pp-icon-size);
   object-fit: contain;
   display: block;
-  /* i tuoi SVG sono già bianchi (#FAFAFB), lascio un leggero boost */
   filter: brightness(1) contrast(1);
-  opacity: .92;
-  transition: transform .18s ease, opacity .18s ease;
+  opacity: 0.92;
+  transition: transform 0.18s ease, opacity 0.18s ease;
 }
-.pp-toolkit-icons img:hover{
-  transform: translateY(-3px) scale(1.03);
+.pp-toolkit-icons img:hover {
+  transform: translateY(-4px) scale(1.04);
   opacity: 1;
 }
 
-/* responsive columns */
-@media (max-width: 1200px){
-  .pp-toolkit-icons{ grid-template-columns: repeat(6, minmax(var(--pp-icon-size), 1fr)); }
-  .pp-toolkit-icons--wide{ grid-template-columns: repeat(6, minmax(var(--pp-icon-size), 1fr)); }
+/* Responsive */
+@media (max-width: 1200px) {
+  .pp-toolkit-icons { grid-template-columns: repeat(6, 1fr); }
+  .pp-toolkit-icons--wide { grid-template-columns: repeat(6, 1fr); }
 }
-@media (max-width: 900px){
-  .pp-toolkit-icons{
+@media (max-width: 900px) {
+  .pp-toolkit-icons {
+    --pp-icon-size: 48px;
+    --pp-icon-gap-x: 28px;
+    --pp-icon-gap-y: 24px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .pp-toolkit-icons--wide { grid-template-columns: repeat(5, 1fr); }
+}
+@media (max-width: 680px) {
+  .pp-toolkit-icons {
     --pp-icon-size: 42px;
-    grid-template-columns: repeat(5, minmax(var(--pp-icon-size), 1fr));
+    grid-template-columns: repeat(4, 1fr);
   }
-  .pp-toolkit-icons--wide{ grid-template-columns: repeat(5, minmax(var(--pp-icon-size), 1fr)); }
+  .pp-toolkit-icons--wide { grid-template-columns: repeat(4, 1fr); }
 }
-@media (max-width: 680px){
-  .pp-toolkit-icons{
+@media (max-width: 480px) {
+  .pp-toolkit-icons {
     --pp-icon-size: 36px;
-    grid-template-columns: repeat(4, minmax(var(--pp-icon-size), 1fr));
+    grid-template-columns: repeat(3, 1fr);
   }
-  .pp-toolkit-icons--wide{ grid-template-columns: repeat(4, minmax(var(--pp-icon-size), 1fr)); }
-}
-@media (max-width: 480px){
-  .pp-toolkit-icons{
-    --pp-icon-size: 32px;
-    grid-template-columns: repeat(3, minmax(var(--pp-icon-size), 1fr));
-  }
-  .pp-toolkit-icons--wide{ grid-template-columns: repeat(3, minmax(var(--pp-icon-size), 1fr)); }
-}
-
-/* rispetto preferenza utente */
-@media (prefers-reduced-motion: reduce){
-  .pp-toolkit-icons img{ transition:none; }
+  .pp-toolkit-icons--wide { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ===== CTA centrale sotto le icone ===== */
