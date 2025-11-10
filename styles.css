@@ -650,7 +650,7 @@ body::before{
 .pp-toolkit-icons {
   /* tokens */
   --pp-icon-size: 80px;               /* dimensione icone */
-  --pp-icon-gap-x: clamp(28px, 3vw, 42px);  /* più distanziamento orizzontale */
+  --pp-icon-gap-x: clamp(28px, 3vw, 80px);  /* più distanziamento orizzontale */
   --pp-icon-gap-y: clamp(22px, 2.4vw, 36px);/* più distanziamento verticale */
 
   display: grid;
