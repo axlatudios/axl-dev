@@ -648,42 +648,62 @@ body::before{
 
 /* Icone */
 .pp-toolkit-icons{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap: clamp(20px, 2vw, 36px);
-  justify-content:flex-start;
+  /* tokens */
+  --pp-icon-size: 48px;               /* base desktop */
+  --pp-icon-gap-x: clamp(18px, 2vw, 28px);
+  --pp-icon-gap-y: clamp(16px, 1.8vw, 24px);
+
+  display: grid;
+  grid-template-columns: repeat(8, minmax(var(--pp-icon-size), 1fr));
+  gap: var(--pp-icon-gap-y) var(--pp-icon-gap-x);
+  align-items: center;
+  justify-items: start;               /* allinea a sinistra la cella */
 }
 .pp-toolkit-icons img{
-  width: clamp(42px, 4vw, 72px);
-  height:auto;
-  filter: brightness(0) invert(1);
-  opacity:0.92;
-  transition: opacity .2s ease, transform .2s ease;
+  width: var(--pp-icon-size);
+  height: var(--pp-icon-size);
+  object-fit: contain;
+  display: block;
+  /* i tuoi SVG sono già bianchi (#FAFAFB), lascio un leggero boost */
+  filter: brightness(1) contrast(1);
+  opacity: .92;
+  transition: transform .18s ease, opacity .18s ease;
 }
 .pp-toolkit-icons img:hover{
-  opacity:1;
-  transform: translateY(-4px);
+  transform: translateY(-3px) scale(1.03);
+  opacity: 1;
 }
 
-/* Responsive */
-@media (max-width: 960px){
-  .pp-toolkit-head{ grid-template-columns:1fr; text-align:left; }
-  .pp-toolkit-title{ font-size: clamp(96px, 24vw, 200px); }
-  .pp-toolkit-block{ grid-template-columns:1fr; }
-}
-
-.pp-toolkit-block--social{
-  align-items:flex-start;
-}
-
-/* icone più “ariosamente” distanziate su desktop */
-.pp-toolkit-icons--wide{
-  gap: clamp(28px, 3vw, 56px);
-  justify-content: space-between;
-}
+/* responsive columns */
 @media (max-width: 1200px){
-  .pp-toolkit-icons--wide{ justify-content:flex-start; }
+  .pp-toolkit-icons{ grid-template-columns: repeat(6, minmax(var(--pp-icon-size), 1fr)); }
+  .pp-toolkit-icons--wide{ grid-template-columns: repeat(6, minmax(var(--pp-icon-size), 1fr)); }
+}
+@media (max-width: 900px){
+  .pp-toolkit-icons{
+    --pp-icon-size: 42px;
+    grid-template-columns: repeat(5, minmax(var(--pp-icon-size), 1fr));
+  }
+  .pp-toolkit-icons--wide{ grid-template-columns: repeat(5, minmax(var(--pp-icon-size), 1fr)); }
+}
+@media (max-width: 680px){
+  .pp-toolkit-icons{
+    --pp-icon-size: 36px;
+    grid-template-columns: repeat(4, minmax(var(--pp-icon-size), 1fr));
+  }
+  .pp-toolkit-icons--wide{ grid-template-columns: repeat(4, minmax(var(--pp-icon-size), 1fr)); }
+}
+@media (max-width: 480px){
+  .pp-toolkit-icons{
+    --pp-icon-size: 32px;
+    grid-template-columns: repeat(3, minmax(var(--pp-icon-size), 1fr));
+  }
+  .pp-toolkit-icons--wide{ grid-template-columns: repeat(3, minmax(var(--pp-icon-size), 1fr)); }
+}
+
+/* rispetto preferenza utente */
+@media (prefers-reduced-motion: reduce){
+  .pp-toolkit-icons img{ transition:none; }
 }
 
 /* ===== CTA centrale sotto le icone ===== */
