@@ -1050,10 +1050,12 @@ body::before{
 
 /* risposta (quando aperta) */
 .pp-faq-a{
-  padding: 0 0 clamp(18px,2vw,22px);
+  padding: 0 0 clamp(28px,3vw,36px); /* ↑ più spazio sotto la frase */
   color: rgba(255,255,255,.90);
-  font-family:"Inter"; font-weight:400;
-  font-size: clamp(14px,1.4vw,18px); line-height:1.6;
+  font-family:"Inter";
+  font-weight:400;
+  font-size: clamp(14px,1.4vw,18px);
+  line-height:1.6;
 }
 
 /* responsive header a colonna su tablet */
@@ -1698,3 +1700,68 @@ body::before{
   .pp-foot-inner{ grid-template-columns: 1fr; }
   .pp-foot-bottom{ flex-direction:column; align-items:flex-start; gap:12px; }
 }
+
+
+
+/* === CONTACT — Hover rosa sulle opzioni della select === */
+.pp-contact-section .pp-select option:hover {
+  background-color: #EE237B !important;  /* rosa brand */
+  color: #FAFAFB !important;             /* testo bianco */
+}
+
+/* Per Firefox (che usa :checked come highlight mentre scorri) */
+.pp-contact-section .pp-select option:checked {
+  background-color: #EE237B !important;
+  color: #FAFAFB !important;
+}
+
+/* === Custom Select AXL (hover pieno controllo) === */
+/* container generato via JS */
+.pp-sel{ position:relative; width:100%; font: 700 15px/1.4 "Urbanist"; color:#FAFAFB; }
+
+/* trigger */
+.pp-sel__btn{
+  width:100%;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:12px; padding:10px 40px 10px 12px;
+  border-radius:10px; border:1px solid rgba(255,255,255,.18);
+  background:#1B171C; color:#FAFAFB; cursor:pointer;
+}
+.pp-sel__btn:focus-visible{ outline:2px solid #EE237B; outline-offset:2px; }
+
+/* caret */
+.pp-sel__btn::after{
+  content:""; width:8px; height:8px; transform:rotate(45deg);
+  border-right:2px solid #FAFAFB; border-bottom:2px solid #FAFAFB;
+  margin-left:auto; opacity:.9; flex:0 0 auto;
+}
+
+/* lista */
+.pp-sel__list{
+  position:absolute; left:0; right:0; margin-top:6px;
+  max-height:240px; overflow:auto; z-index:40;
+  background:#1B171C; border:1px solid rgba(255,255,255,.18); border-radius:10px;
+  box-shadow:0 12px 32px rgba(0,0,0,.36);
+  display:none; /* toggled via [data-open] */
+}
+.pp-sel[data-open="true"] .pp-sel__list{ display:block; }
+
+/* option */
+.pp-sel__opt{
+  padding:10px 12px; cursor:pointer; user-select:none; white-space:nowrap;
+}
+.pp-sel__opt:hover{ background:#EE237B; color:#FAFAFB; }      /* <-- hover rosa */
+
+/* nascondi la select ma lasciala attiva per il submit */
+select.pp-select--enhance{
+  position:absolute !important; inset:auto auto auto 0;
+  width:1px !important; height:1px !important; padding:0 !important; border:0 !important;
+  clip:rect(0 0 0 0); clip-path:inset(50%); overflow:hidden !important; white-space:nowrap !important;
+}
+
+.pp-selectwrap:has(.pp-sel)::after { display:none; }
+
+#axlContactForm.pp-form{
+  margin-top: clamp(-32px, -32px, -32px);  /* uguale al gap delle card */
+}
+

@@ -552,17 +552,19 @@
                 <span class="pp-faq-q">Che tipo di progetti realizzate?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-1" hidden>
+            <div id="faq-1" hidden style="margin-top: -16px; padding-bottom: 30px;">
                 Realizziamo landing ad alte performance, siti corporate, e web-app custom. Design in Figma → handoff → sviluppo (React/Angular/Tailwind) con QA e ottimizzazioni.
             </div>
             </article>
+
+            
 
             <article class="pp-faq-row" role="listitem">
             <button class="pp-faq-toggle" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-btn-2">
                 <span class="pp-faq-q">Lavorate solo con aziende o anche con privati?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-2" hidden>
+            <div id="faq-2" hidden style="margin-top: -16px; padding-bottom: 30px;">
                 Principalmente PMI, startup e professionisti. Se il progetto ha obiettivi chiari e valore, lo prendiamo in carico a prescindere dalla dimensione.
             </div>
             </article>
@@ -572,7 +574,7 @@
                 <span class="pp-faq-q">Quanto dura in media un progetto?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-3" hidden>
+            <div id="faq-3" hidden style="margin-top: -16px; padding-bottom: 30px;">
                 Indicativamente: landing 2–3 settimane, sito corporate 4–6 settimane; web-app su sprint (roadmap condivisa).
             </div>
             </article>
@@ -582,7 +584,7 @@
                 <span class="pp-faq-q">Lavorate anche da remoto?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-4" chidden>
+            <div id="faq-4" hidden style="margin-top: -16px; padding-bottom: 30px;">
                 Sì. Processi e tool sono pensati per collaborazioni full-remote; facciamo meeting in presenza quando serve.
             </div>
             </article>
@@ -592,7 +594,7 @@
                 <span class="pp-faq-q">Offrite anche manutenzione o supporto post-lancio?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-5"  hidden>
+            <div id="faq-5"  hidden style="margin-top: -16px; padding-bottom: 30px;">
                 Certo: piani di supporto, piccoli sviluppi evolutivi, SEO on-page di base e monitoraggio performance.
             </div>
             </article>
@@ -654,19 +656,19 @@
         <input id="c_tel" name="telefono" type="tel" class="pp-input" placeholder="Placeholder">
       </div>
 
-      <div class="pp-field pp-field--full">
+        <div class="pp-field pp-field--full">
         <label for="c_servizio" class="pp-label">Servizio</label>
         <div class="pp-selectwrap">
-          <select id="c_servizio" name="servizio" class="pp-select">
-            <option value="" selected>Dropdown menu</option>
+            <select id="c_servizio" name="servizio" class="pp-select" required>
+            <option value="" selected disabled hidden>Seleziona…</option>
             <option>Web Design</option>
             <option>Sviluppo Web</option>
             <option>Sito Corporate</option>
             <option>Landing Page</option>
             <option>Restyling</option>
-          </select>
+            </select>
         </div>
-      </div>
+        </div>
 
       <div class="pp-field pp-field--full">
         <label for="c_msg" class="pp-label">Messaggio</label>
@@ -884,6 +886,85 @@
     show(ok,true);
     submitBtn.removeAttribute('aria-disabled');
   });
+})();
+</script>
+
+<script>
+(function(){
+  function enhanceSelect(sel){
+    if(sel.dataset.enhanced) return;
+    sel.dataset.enhanced = "true";
+    sel.classList.add("pp-select--enhance");
+
+    // Aggiungo una classe al wrapper per spegnere la freccia CSS
+    const wrap = document.createElement("div");
+    wrap.className = "pp-sel";
+    wrap.setAttribute("role","combobox");
+    wrap.setAttribute("aria-haspopup","listbox");
+    wrap.setAttribute("aria-expanded","false");
+    // segnala "enhanced" al container originale
+    sel.closest(".pp-selectwrap")?.classList.add("is-enhanced");
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "pp-sel__btn";
+    // testo iniziale: usa option selezionata o fallback "Seleziona…"
+    btn.textContent = sel.options[sel.selectedIndex]?.text || sel.getAttribute("placeholder") || "Seleziona…";
+    wrap.appendChild(btn);
+
+    const list = document.createElement("ul");
+    list.className = "pp-sel__list";
+    list.setAttribute("role","listbox");
+    wrap.appendChild(list);
+
+    // CREA OPZIONI, SALTANDO placeholder/disabled/empty
+    [...sel.options].forEach((opt)=>{
+      if (opt.disabled || opt.value === "") return;    // <<— evita il placeholder
+      const li = document.createElement("li");
+      li.className = "pp-sel__opt";
+      li.setAttribute("role","option");
+      li.setAttribute("data-value", opt.value);
+      li.textContent = opt.text;
+      if(opt.selected) li.setAttribute("aria-selected","true");
+      li.addEventListener("click", ()=>{
+        sel.value = opt.value;               // aggiorna la select per il submit
+        btn.textContent = opt.text;
+        list.querySelectorAll(".pp-sel__opt[aria-selected]").forEach(n=>n.removeAttribute("aria-selected"));
+        li.setAttribute("aria-selected","true");
+        wrap.dataset.open = "false";
+        wrap.setAttribute("aria-expanded","false");
+        sel.dispatchEvent(new Event("change", {bubbles:true}));
+      });
+      list.appendChild(li);
+    });
+
+    btn.addEventListener("click", ()=>{
+      const open = wrap.dataset.open === "true";
+      wrap.dataset.open = String(!open);
+      wrap.setAttribute("aria-expanded", String(!open));
+    });
+
+    // chiudi al di fuori / ESC
+    document.addEventListener("click", (e)=>{
+      if(!wrap.contains(e.target)){
+        wrap.dataset.open = "false";
+        wrap.setAttribute("aria-expanded","false");
+      }
+    });
+    document.addEventListener("keydown", (e)=>{
+      if(e.key === "Escape"){
+        wrap.dataset.open = "false";
+        wrap.setAttribute("aria-expanded","false");
+        btn.focus();
+      }
+    });
+
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel); // conserva nel DOM per la submission
+  }
+
+  // attiva solo le select che vuoi
+  document.querySelectorAll("select.pp-select.pp-select--custom, select#c_servizio").forEach(enhanceSelect);
 })();
 </script>
 
