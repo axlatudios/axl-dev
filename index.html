@@ -968,51 +968,81 @@
 })();
 </script>
 
-<footer class="pp-footer" role="contentinfo">
-  <div class="pp-foot-inner">
-    <!-- Col 1: word-mark -->
-    <a class="pp-foot-brand" href="#top" aria-label="AXL Studios">
-      <!-- usa il tuo SVG/PNG del logotipo -->
-      <img src="./assets/logo-wordmark.svg" alt="AXL Studios" loading="lazy">
-    </a>
-
-    <!-- Col 2: About -->
-    <nav class="pp-foot-col" aria-label="About AXL">
-      <h3 class="pp-foot-title">About AXL</h3>
-      <ul class="pp-foot-list">
-        <li><a href="#about">Chi siamo</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#values">Valori</a></li>
-      </ul>
-    </nav>
-
-    <!-- Col 3: Servizi -->
-    <nav class="pp-foot-col" aria-label="Servizi">
-      <h3 class="pp-foot-title">Servizi</h3>
-      <ul class="pp-foot-list">
-        <li><a href="#services">Prodotti digitali</a></li>
-        <li><a href="#services">Branding</a></li>
-        <li><a href="#services">Siti & Ecommerce</a></li>
-      </ul>
-    </nav>
-
-    <!-- Col 4: Progetti/CTA -->
-    <nav class="pp-foot-col" aria-label="Progetti">
-      <h3 class="pp-foot-title">Progetti</h3>
-      <ul class="pp-foot-list">
-        <li><a href="#projects">Portfolio</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contatti</a></li>
-      </ul>
-    </nav>
+<footer class="axl-footer" role="contentinfo" aria-labelledby="axl-footer-claim">
+  <!-- 1) Logo esteso -->
+  <div class="axl-footer__hero">
+    <img
+      class="axl-footer__logo-extended"
+      src="assets/Logotipo_Esteso_White.svg"
+      alt="axl studios"
+      width="1920"
+      height="420"
+      decoding="async"
+      loading="lazy"
+    />
   </div>
 
-  <div class="pp-foot-bottom">
-    <p class="pp-foot-tag">Un’unica <em>visione</em> per far crescere il tuo progetto.</p>
-    <div class="pp-foot-meta">
-      <span>© AXL Studios</span>
-      <a href="#privacy">Privacy</a>
-      <a href="#cookie">Cookie</a>
+  <!-- 2) Divisore -->
+  <hr class="axl-footer__divider" aria-hidden="true" />
+
+  <!-- 3) Contenuto -->
+  <div class="axl-footer__grid">
+    <!-- 3a) Brand + social -->
+    <div class="axl-footer__brand">
+      <img
+        class="axl-footer__brandmark"
+        src="assets/Horizontal_Logo_No_Payoff_Light.svg"
+        alt="axl"
+        width="156"
+        height="48"
+        decoding="async"
+        loading="lazy"
+      />
+
+      <nav class="axl-footer__social" aria-label="Social">
+        <a href="#" aria-label="Instagram" class="sbtn">
+          <img src="assets/icons/instagram.svg" alt="" class="sbtn__icon" />
+        </a>
+        <a href="#" aria-label="Facebook" class="sbtn">
+          <img src="assets/icons/Facebook.svg" alt="" class="sbtn__icon" />
+        </a>
+        <a href="#" aria-label="X" class="sbtn">
+          <img src="assets/icons/x.svg" alt="" class="sbtn__icon" />
+        </a>
+        <a href="#" aria-label="LinkedIn" class="sbtn">
+          <img src="assets/icons/linkedin.svg" alt="" class="sbtn__icon" />
+        </a>
+        <a href="#" aria-label="Fiverr" class="sbtn">
+          <img src="assets/icons/Fiverr.svg" alt="" class="sbtn__icon" />
+        </a>
+      </nav>
+    </div>
+
+    <!-- 3b) Menu -->
+    <nav class="axl-footer__nav" aria-label="Footer">
+      <a class="navlink" href="#about">About AXL</a>
+      <a class="navlink" href="#servizi">Servizi</a>
+      <a class="navlink" href="#progetti">Progetti</a>
+      <a class="navlink" href="#team">Team</a>
+      <a class="navlink" href="#strumenti">Strumenti</a>
+      <a class="navlink navlink--out" href="#contatti" aria-label="Contattaci">
+        Contattaci
+        <span class="navlink__chev" aria-hidden="true"></span>
+      </a>
+    </nav>
+
+    <!-- 3c) Claim + CTA -->
+    <div class="axl-footer__cta">
+      <h2 id="axl-footer-claim" class="axl-footer__claim">
+        Un’unica <em>visione</em>: far convivere
+        <strong class="accent">creatività</strong> e
+        <strong class="accent">tecnologia</strong>.
+      </h2>
+
+      <a class="axl-btn" href="#contatti">
+        <span>Contattaci</span>
+        <span class="axl-btn__chev" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
 </footer>
