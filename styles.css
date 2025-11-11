@@ -1509,6 +1509,82 @@ body::before{
   }
 }
 
+/* ===== CONTACT — Select con freccia minimal + colori leggibili ===== */
+.pp-contact-section .pp-selectwrap{
+  position: relative;
+}
+
+.pp-contact-section .pp-select{
+  appearance: none;           /* nasconde la freccia di default */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  color: #FAFAFB;             /* testo bianco */
+  background: #1B171C;        /* sfondo scuro */
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 10px;
+
+  padding: 12px 44px 12px 14px; /* spazio a destra per la freccia */
+  line-height: 1.4;
+}
+
+/* Colori anche nella lista opzioni (supporto dipende dal browser) */
+.pp-contact-section .pp-select option{
+  color: #FAFAFB;
+  background: #1B171C;
+}
+
+/* Placeholder/voce vuota un po' più chiara (se usi value="") */
+.pp-contact-section .pp-select option[value=""]{
+  color: rgba(250,250,251,.65);
+}
+
+/* Freccia minimal (chevron) */
+.pp-contact-section .pp-selectwrap::after{
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #FAFAFB;
+  border-bottom: 2px solid #FAFAFB;
+  opacity: .9;
+  pointer-events: none;        /* non blocca i click sulla select */
+}
+
+/* Stati focus coerenti */
+.pp-contact-section .pp-select:focus{
+  border-color: #F288B7;
+  box-shadow: 0 0 0 4px rgba(242,136,183,.18);
+  outline: none;
+}
+
+
+/* === CONTACT — restringi SOLO il form === */
+:root{
+  --axl-form-max: 1750px;           /* cambialo: 880 / 820 / 760 / 700 */
+}
+
+#axlContactForm.pp-form{
+  width: min(100%, var(--axl-form-max));
+  margin-inline: auto;             /* centra il form */
+  gap: 16px;                        /* mantieni respiro */
+}
+
+/* assicura gli elementi full-width sulla griglia */
+#axlContactForm .pp-field--full,
+#axlContactForm .pp-form-foot,
+#axlContactForm .pp-form-msg{
+  grid-column: 1 / -1;
+}
+
+/* mobile: sfrutta tutta la larghezza */
+@media (max-width: 680px){
+  #axlContactForm.pp-form{ width: 100%; }
+}
+
 /* ============================
    FOOTER — AXL (grid + type)
 ============================ */

@@ -552,7 +552,7 @@
                 <span class="pp-faq-q">Che tipo di progetti realizzate?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-1" class="pp-faq-a" role="region" aria-labelledby="faq-btn-1" hidden>
+            <div id="faq-1" hidden>
                 Realizziamo landing ad alte performance, siti corporate, e web-app custom. Design in Figma → handoff → sviluppo (React/Angular/Tailwind) con QA e ottimizzazioni.
             </div>
             </article>
@@ -562,7 +562,7 @@
                 <span class="pp-faq-q">Lavorate solo con aziende o anche con privati?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-2" class="pp-faq-a" role="region" aria-labelledby="faq-btn-2" hidden>
+            <div id="faq-2" hidden>
                 Principalmente PMI, startup e professionisti. Se il progetto ha obiettivi chiari e valore, lo prendiamo in carico a prescindere dalla dimensione.
             </div>
             </article>
@@ -572,7 +572,7 @@
                 <span class="pp-faq-q">Quanto dura in media un progetto?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-3" class="pp-faq-a" role="region" aria-labelledby="faq-btn-3" hidden>
+            <div id="faq-3" hidden>
                 Indicativamente: landing 2–3 settimane, sito corporate 4–6 settimane; web-app su sprint (roadmap condivisa).
             </div>
             </article>
@@ -582,7 +582,7 @@
                 <span class="pp-faq-q">Lavorate anche da remoto?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-4" class="pp-faq-a" role="region" aria-labelledby="faq-btn-4" hidden>
+            <div id="faq-4" chidden>
                 Sì. Processi e tool sono pensati per collaborazioni full-remote; facciamo meeting in presenza quando serve.
             </div>
             </article>
@@ -592,7 +592,7 @@
                 <span class="pp-faq-q">Offrite anche manutenzione o supporto post-lancio?</span>
                 <svg class="pp-faq-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.7 9.3a1 1 0 0 1 1.4 0L12 13.2l3.9-3.9a1 1 0 1 1 1.4 1.4l-4.6 4.6a1 1 0 0 1-1.4 0L6.7 10.7a1 1 0 0 1 0-1.4Z"/></svg>
             </button>
-            <div id="faq-5" class="pp-faq-a" role="region" aria-labelledby="faq-btn-5" hidden>
+            <div id="faq-5"  hidden>
                 Certo: piani di supporto, piccoli sviluppi evolutivi, SEO on-page di base e monitoraggio performance.
             </div>
             </article>
@@ -601,99 +601,100 @@
 
 <!-- ==================== CONTACT ==================== -->
 <section id="contact" class="pp-contact-section">
-  <div class="pp-contact-head">
-    <h2 id="contactTitle" class="pp-contact-title">Contatti</h2>
-    <p class="pp-contact-desc">
-      Hai un progetto, un’idea o una semplice curiosità? <br>
-      Scrivici — ti risponderemo al più presto per capire come possiamo trasformarla in qualcosa di concreto.
-    </p>
-  </div>
-
-  <!-- Row: Email + Social (card glass) -->
-  <div class="pp-contact-toprow">
-    <a class="pp-contact-card" href="mailto:axl@studios.com">
-      <span class="pp-card-ic" aria-hidden="true"></span>
-      <span class="pp-card-label">E-Mail</span>
-      <span class="pp-card-val">axl@studios.com</span>
-    </a>
-
-    <div class="pp-contact-card" role="group" aria-label="Social">
-      <span class="pp-card-ic" aria-hidden="true"></span>
-      <span class="pp-card-label">Social</span>
-      <div class="pp-card-social">
-        <a aria-label="Instagram" href="#" class="pp-social-btn">IG</a>
-        <a aria-label="Facebook"  href="#" class="pp-social-btn">Fb</a>
-        <a aria-label="X"         href="#" class="pp-social-btn">X</a>
-        <a aria-label="LinkedIn"  href="#" class="pp-social-btn">in</a>
-        <a aria-label="Facebook p." href="#" class="pp-social-btn">F</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Form 2 colonne -->
-  <form id="axlContactForm" class="pp-form" method="post" novalidate>
-
-    <div class="pp-field">
-      <label for="c_nome" class="pp-label">Nome</label>
-      <input id="c_nome" name="nome" type="text" class="pp-input" placeholder="Placeholder" required>
+  <div class="pp-contact-inner">
+    <div class="pp-contact-head">
+      <h2 id="contactTitle" class="pp-contact-title">Contatti</h2>
+      <p class="pp-contact-desc">
+        Hai un progetto, un’idea o una semplice curiosità? <br>
+        Scrivici — ti risponderemo al più presto per capire come possiamo trasformarla in qualcosa di concreto.
+      </p>
     </div>
 
-    <div class="pp-field">
-      <label for="c_cognome" class="pp-label">Cognome</label>
-      <input id="c_cognome" name="cognome" type="text" class="pp-input" placeholder="Placeholder" required>
-    </div>
+    <!-- Row: Email + Social (card glass) -->
+    <div class="pp-contact-toprow">
+      <a class="pp-contact-card" href="mailto:axl@studios.com">
+        <span class="pp-card-ic" aria-hidden="true"></span>
+        <span class="pp-card-label">E-Mail</span>
+        <span class="pp-card-val">axl@studios.com</span>
+      </a>
 
-    <div class="pp-field">
-      <label for="c_email" class="pp-label">E-Mail</label>
-      <input id="c_email" name="email" type="email" class="pp-input" placeholder="Placeholder" required>
-    </div>
-
-    <div class="pp-field">
-      <label for="c_tel" class="pp-label">Telefono</label>
-      <input id="c_tel" name="telefono" type="tel" class="pp-input" placeholder="Placeholder">
-    </div>
-
-    <div class="pp-field pp-field--full">
-      <label for="c_servizio" class="pp-label">Servizio</label>
-      <div class="pp-selectwrap">
-        <select id="c_servizio" name="servizio" class="pp-select">
-          <option value="" selected>Dropdown menu</option>
-          <option>Web Design</option>
-          <option>Sviluppo Web</option>
-          <option>Sito Corporate</option>
-          <option>Landing Page</option>
-          <option>Restyling</option>
-        </select>
-        <span class="pp-select-caret" aria-hidden="true"></span>
+      <div class="pp-contact-card" role="group" aria-label="Social">
+        <span class="pp-card-ic" aria-hidden="true"></span>
+        <span class="pp-card-label">Social</span>
+        <div class="pp-card-social">
+          <a aria-label="Instagram" href="#" class="pp-social-btn">IG</a>
+          <a aria-label="Facebook"  href="#" class="pp-social-btn">Fb</a>
+          <a aria-label="X"         href="#" class="pp-social-btn">X</a>
+          <a aria-label="LinkedIn"  href="#" class="pp-social-btn">in</a>
+          <a aria-label="Facebook p." href="#" class="pp-social-btn">F</a>
+        </div>
       </div>
     </div>
 
-    <div class="pp-field pp-field--full">
-      <label for="c_msg" class="pp-label">Messaggio</label>
-      <textarea id="c_msg" name="message" rows="6" class="pp-textarea" placeholder="Scrivi qui…"></textarea>
-    </div>
+    <!-- Form 2 colonne -->
+    <form id="axlContactForm" class="pp-form" method="post" novalidate>
 
-    <div class="pp-consent">
-      <input id="c_cons" name="consent" type="checkbox" class="pp-checkbox">
-      <label for="c_cons" class="pp-consent-label">
-        Acconsento al trattamento dei dati secondo l’Informativa Privacy e per essere ricontattato.
-      </label>
-    </div>
+      <div class="pp-field">
+        <label for="c_nome" class="pp-label">Nome</label>
+        <input id="c_nome" name="nome" type="text" class="pp-input" placeholder="Placeholder" required>
+      </div>
 
-    <div class="pp-form-foot">
-      <button type="submit" class="pp-btn" id="c_submit">
-        <span>Invia</span><span class="pp-btn__badge" aria-hidden="true"></span>
-      </button>
-    </div>
+      <div class="pp-field">
+        <label for="c_cognome" class="pp-label">Cognome</label>
+        <input id="c_cognome" name="cognome" type="text" class="pp-input" placeholder="Placeholder" required>
+      </div>
 
-    <p class="pp-form-msg pp-form-msg--ok" hidden>Messaggio inviato! Ti ricontatteremo a breve.</p>
-    <p class="pp-form-msg pp-form-msg--err" hidden>Invio non riuscito. Controlla i campi.</p>
-  </form>
+      <div class="pp-field">
+        <label for="c_email" class="pp-label">E-Mail</label>
+        <input id="c_email" name="email" type="email" class="pp-input" placeholder="Placeholder" required>
+      </div>
+
+      <div class="pp-field">
+        <label for="c_tel" class="pp-label">Telefono</label>
+        <input id="c_tel" name="telefono" type="tel" class="pp-input" placeholder="Placeholder">
+      </div>
+
+      <div class="pp-field pp-field--full">
+        <label for="c_servizio" class="pp-label">Servizio</label>
+        <div class="pp-selectwrap">
+          <select id="c_servizio" name="servizio" class="pp-select">
+            <option value="" selected>Dropdown menu</option>
+            <option>Web Design</option>
+            <option>Sviluppo Web</option>
+            <option>Sito Corporate</option>
+            <option>Landing Page</option>
+            <option>Restyling</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="pp-field pp-field--full">
+        <label for="c_msg" class="pp-label">Messaggio</label>
+        <textarea id="c_msg" name="message" rows="6" class="pp-textarea" placeholder="Scrivi qui…"></textarea>
+      </div>
+
+      <div class="pp-consent">
+        <input id="c_cons" name="consent" type="checkbox" class="pp-checkbox">
+        <label for="c_cons" class="pp-consent-label">
+          Acconsento al trattamento dei dati secondo l’Informativa Privacy e per essere ricontattato.
+        </label>
+      </div>
+
+      <div class="pp-form-foot">
+        <button type="submit" class="pp-btn" id="c_submit">
+          <span>Invia</span><span class="pp-btn__badge" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <p class="pp-form-msg pp-form-msg--ok" hidden>Messaggio inviato! Ti ricontatteremo a breve.</p>
+      <p class="pp-form-msg pp-form-msg--err" hidden>Invio non riuscito. Controlla i campi.</p>
+    </form>
+  </div>
 </section>
 
 
         
-    </div>
+
 
 
 
