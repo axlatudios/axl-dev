@@ -108,7 +108,6 @@ body::before{
 .pp-logo:hover,
 a.pp-logo:focus-visible{
   background: linear-gradient(90deg, var(--axl-pink-300), var(--axl-pink-600));
-  transform: translateY(-1px);
   filter: drop-shadow(0 0 10px rgba(238,35,123,.35));
 }
 
