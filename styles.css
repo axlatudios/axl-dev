@@ -80,7 +80,44 @@ body::before{
   background:linear-gradient(90deg, rgba(250,250,251,.22) 0%, rgba(250,250,251,.08) 20%, rgba(250,250,251,.08) 80%, rgba(250,250,251,.22) 100%);
   pointer-events:none;
 }
-.pp-logo{ width:78px; height:32px; background:url("./assets/logo.svg") center/contain no-repeat; }
+/* === NAV — Logo: da bianco → rosa (senza underline) === */
+/* Usa la SVG come maschera e colora via background */
+.pp-logo{
+  position: relative;
+  width:120px; height:49.28px;
+  -webkit-mask: url("./assets/logo.svg") center / contain no-repeat;
+          mask: url("./assets/logo.svg") center / contain no-repeat;
+  background: #FAFAFB; /* bianco di default */
+  transition: background .22s ease, transform .18s ease, filter .22s ease;
+  will-change: background, transform, filter;
+}
+
+/* rende il logo cliccabile e con focus visibile */
+.pp-logo{
+  display:block;                 /* allarga area cliccabile */
+  cursor:pointer;
+  outline:none;
+}
+.pp-logo:focus-visible{
+  outline:2px solid var(--axl-pink-500);
+  outline-offset:4px;
+}
+
+/* hover/focus: riempi con il gradiente rosa della palette */
+.pp-nav-left:hover .pp-logo,
+.pp-logo:hover,
+a.pp-logo:focus-visible{
+  background: linear-gradient(90deg, var(--axl-pink-300), var(--axl-pink-600));
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 10px rgba(238,35,123,.35));
+}
+
+/* accessibilità per <a class="pp-logo"> */
+a.pp-logo:focus-visible{
+  outline: 2px solid var(--axl-pink-500);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
 
 .pp-nav{
   display:flex; align-items:center; gap:clamp(10px,1.6vw,24px);
@@ -1858,4 +1895,737 @@ select.pp-select--enhance{
     gap: 28px;
     padding-bottom: 64px;
   }
+}
+
+/* === Glass badge per freccia/chevron === */
+.pp-btn__badge,
+.btn-primary .icon{
+  width:36px; height:36px; border-radius:999px;
+  display:inline-flex; align-items:center; justify-content:center;
+
+  /* glass */
+  background: rgba(255,255,255,0.10);
+  border: 2px solid rgba(250,250,251,0.55);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+
+  /* riflesso + profondità */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 6px 14px rgba(0,0,0,0.24);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+/* hover/active: un filo più “bagnato” */
+.pp-btn:hover .pp-btn__badge,
+.btn-primary:hover .icon{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(250,250,251,0.70);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    0 10px 22px rgba(0,0,0,0.28);
+  transform: translateY(-1px);
+}
+.pp-btn:active .pp-btn__badge,
+.btn-primary:active .icon{
+  transform: translateY(0) scale(.98);
+}
+
+/* icona coerente col testo del bottone */
+.pp-btn__icon,
+.btn-primary .icon svg{
+  width:18px; height:18px; display:block;
+  fill: currentColor;
+  opacity:.95;
+}
+
+/* fallback se il blur non è supportato */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .pp-btn__badge,
+  .btn-primary .icon{
+    background: rgba(255,255,255,0.16);
+  }
+}
+
+/* =============================================
+   AXL Studios — vNext patch (glass + responsive)
+   Incolla TUTTO questo blocco in fondo al tuo CSS esistente.
+   Sovrascrive solo ciò che serve e aggiunge miglioramenti.
+============================================= */
+
+/* === 0) Tokens aggiuntivi === */
+:root{
+  /* altezza navbar per allineare pannelli mobile */
+  --nav-h: clamp(56px, 8vw, 96px);
+
+  /* glass multi‑layer per badge/icona */
+  --glass-grad-top: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.06));
+  --glass-grad-spec-1: radial-gradient(90% 120% at 28% 8%, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 60%);
+  --glass-grad-spec-2: radial-gradient(120% 90% at 72% 120%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 55%);
+}
+
+/* === 1) NAV responsivo più solido === */
+.pp-navbar{ min-height: var(--nav-h); padding-block: clamp(10px,2.2vw,32px); }
+@media (max-width: 1024px){
+  .pp-nav{ top: var(--nav-h); }
+}
+
+/* === 2) HERO: padding e blur più equilibrati su mobile === */
+.pp-hero-inner{ padding: clamp(32px,6vw,96px) clamp(20px,7vw,280px); }
+.pp-hero-overlay{ -webkit-backdrop-filter: blur(10px) saturate(105%); backdrop-filter: blur(10px) saturate(105%); }
+@media (max-width: 560px){
+  .pp-hero{ min-height: 480px; }
+  .pp-hero-overlay{ -webkit-backdrop-filter: blur(8px) saturate(100%); backdrop-filter: blur(8px) saturate(100%); }
+}
+
+/* === 3) SERVICES: card width fluida + inerzia touch migliore === */
+.pp-services-viewport{ scroll-behavior: smooth; }
+.pp-service{ --card-w: clamp(280px, 60vw, 600px); }
+
+/* === 4) TEAM: rimuovi height fissa, usa min-height fluida === */
+.pp-team-col{ height: auto; min-height: clamp(420px, 60dvh, 780px); padding: clamp(32px,6vw,80px); }
+.pp-team-photo{ height: clamp(220px, 32dvh, 340px); }
+
+/* === 5) PROJECTS: split che non “spacca” su laptop === */
+.pp-projects-split{ height: auto; }
+.pp-projects-panel{ padding: clamp(24px,4vw,80px) clamp(24px,5vw,80px); }
+
+/* === 6) TOOLKIT icons: griglia auto‑fit (niente media query a cascata) === */
+.pp-toolkit-icons{
+  --pp-icon-size: clamp(36px, 7vw, 80px);
+  --pp-icon-gap-x: clamp(20px, 3.5vw, 60px);
+  --pp-icon-gap-y: clamp(18px, 2.5vw, 32px);
+  grid-template-columns: repeat(auto-fit, minmax(var(--pp-icon-size), 1fr));
+}
+.pp-toolkit-cta{ margin-top: clamp(18px, 3.5vw, 40px); }
+
+/* === 7) FAQ: titoli enormi ma contenuti gestibili === */
+.pp-faq-title{ font-size: clamp(72px, 11vw, 208px); }
+.pp-faq-q{ font-size: clamp(18px, 1.6vw, 26px); }
+
+/* === 8) CONTACT: form più stretto su desktop, pieno su mobile === */
+#axlContactForm.pp-form{ width: min(100%, var(--axl-form-max, 1200px)); }
+@media (max-width: 1280px){
+  #axlContactForm.pp-form{ width: min(100%, 980px); }
+}
+@media (max-width: 900px){
+  #axlContactForm.pp-form{ width: 100%; }
+}
+
+/* === 9) Footer: claim che non va a capo male === */
+.axl-footer__claim{ font-size: clamp(28px, 4.4vw, 48px); }
+
+/* === 10) Preferenze utente: riduci animazioni === */
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration: .001ms !important; animation-duration: .001ms !important; }
+  .pp-btn, .pp-service-cta, .pp-project-cta, .pp-toolkit-cta-btn{ transform: none !important; }
+}
+
+/* === 11) FALLBACK no‑blur: colori un filo più pieni per mantenere contrasto === */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .pp-service-inner,
+  .pp-contact-section .pp-form,
+  .pp-faq-item,
+  .pp-contact-section .pp-contact-card,
+  .pp-cta,
+  .pp-btn{
+    background: rgba(255,255,255,0.10);
+  }
+}
+
+/* =====================================================
+   GLASS BADGE — sostituisce il semplice linear‑gradient
+   con multi‑layer + riflesso.
+   Applica sia a .pp-btn__badge sia a .btn-primary .icon
+===================================================== */
+.pp-btn__badge,
+.btn-primary .icon{
+  position: relative; /* per il riflesso ::after */
+  background: var(--glass-grad-spec-1), var(--glass-grad-spec-2), var(--glass-grad-top), rgba(255,255,255,0.10);
+  border: 2px solid rgba(250,250,251,0.60);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 6px 14px rgba(0,0,0,0.24);
+}
+/* riflesso alto tipo "sheen" */
+.pp-btn__badge::after,
+.btn-primary .icon::after{
+  content:""; position:absolute; left:2px; right:2px; top:2px; height:42%;
+  border-radius:inherit; pointer-events:none;
+  background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,0));
+  opacity:.65; filter: blur(.4px);
+}
+/* hover/active “bagnato” + focus ring accessibile */
+.pp-btn:hover .pp-btn__badge,
+.btn-primary:hover .icon{
+  background: var(--glass-grad-spec-1), var(--glass-grad-spec-2), linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.10)), rgba(255,255,255,0.12);
+  border-color: rgba(250,250,251,0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    0 10px 22px rgba(0,0,0,0.28);
+}
+.pp-btn:focus-visible .pp-btn__badge,
+.btn-primary:focus-visible .icon{
+  box-shadow:
+    0 0 0 3px rgba(238,35,123,.24),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 8px 22px rgba(0,0,0,.24);
+}
+
+/* icona interna sempre leggibile */
+.pp-btn__icon,
+.btn-primary .icon svg{ opacity:.98; }
+
+/* === 12) Mobile micro‑tuning generale === */
+@media (max-width: 560px){
+  .pp-services-desc,
+  .pp-projects-desc,
+  .pp-team-desc,
+  .pp-faq-desc,
+  .pp-contact-section .pp-contact-desc{ font-size: clamp(14px, 4.2vw, 18px); }
+  .pp-service-text,
+  .pp-project-text,
+  .pp-team-bio{ font-size: clamp(13px, 3.8vw, 16px); }
+}
+
+/* === 13) Safe‑area padding per notch iOS === */
+body{ padding-left: max(0px, env(safe-area-inset-left)); padding-right: max(0px, env(safe-area-inset-right)); }
+.pp-navbar{ padding-left: calc(var(--container-pad) + env(safe-area-inset-left)); padding-right: calc(var(--container-pad) + env(safe-area-inset-right)); }
+
+
+/* =============================================
+   AXL Studios — vNext tail patch (append this)
+   Lighter overrides + better glass + responsive
+============================================= */
+
+/* 0) Extra tokens (no HTML changes needed) */
+:root{
+  --nav-h: clamp(56px, 8vw, 96px);
+  --glass-grad-top: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.06));
+  --glass-grad-spec-1: radial-gradient(90% 120% at 28% 8%, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 60%);
+  --glass-grad-spec-2: radial-gradient(120% 90% at 72% 120%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 55%);
+}
+
+/* 1) NAV: robust on mobile */
+.pp-navbar{ min-height: var(--nav-h); padding-block: clamp(10px,2.2vw,32px); }
+@media (max-width: 1024px){ .pp-nav{ top: var(--nav-h); }}
+
+/* 2) HERO: tighter padding + softer blur on small */
+.pp-hero-inner{ padding: clamp(32px,6vw,96px) clamp(20px,7vw,280px); }
+.pp-hero-overlay{ -webkit-backdrop-filter: blur(10px) saturate(105%); backdrop-filter: blur(10px) saturate(105%); }
+@media (max-width:560px){
+  .pp-hero{ min-height:480px; }
+  .pp-hero-overlay{ -webkit-backdrop-filter: blur(8px) saturate(100%); backdrop-filter: blur(8px) saturate(100%); }
+}
+
+/* 3) SERVICES: fluid card width + smooth drag */
+.pp-services-viewport{ scroll-behavior: smooth; }
+.pp-service{ --card-w: clamp(280px, 60vw, 600px); }
+
+/* 4) TEAM: remove fixed heights */
+.pp-team-col{ height:auto; min-height: clamp(420px, 60dvh, 780px); padding: clamp(32px,6vw,80px); }
+.pp-team-photo{ height: clamp(220px, 32dvh, 340px); }
+
+/* 5) PROJECTS: friendlier on laptop widths */
+.pp-projects-split{ height:auto; }
+.pp-projects-panel{ padding: clamp(24px,4vw,80px) clamp(24px,5vw,80px); }
+
+/* 6) TOOLKIT icons: auto-fit grid (fewer media queries) */
+.pp-toolkit-icons{
+  --pp-icon-size: clamp(36px, 7vw, 80px);
+  --pp-icon-gap-x: clamp(20px, 3.5vw, 60px);
+  --pp-icon-gap-y: clamp(18px, 2.5vw, 32px);
+  grid-template-columns: repeat(auto-fit, minmax(var(--pp-icon-size), 1fr));
+}
+.pp-toolkit-cta{ margin-top: clamp(18px, 3.5vw, 40px); }
+
+/* 7) FAQ: scale headlines but keep questions readable */
+.pp-faq-title{ font-size: clamp(72px, 11vw, 208px); }
+.pp-faq-q{ font-size: clamp(18px, 1.6vw, 26px); }
+
+/* 8) CONTACT: narrower on desktop, full on mobile */
+#axlContactForm.pp-form{ width: min(100%, var(--axl-form-max, 1200px)); }
+@media (max-width:1280px){ #axlContactForm.pp-form{ width: min(100%, 980px); } }
+@media (max-width:900px){  #axlContactForm.pp-form{ width: 100%; } }
+
+/* 9) Footer claim: avoid ugly wraps */
+.axl-footer__claim{ font-size: clamp(28px, 4.4vw, 48px); }
+
+/* 10) Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.001ms !important; animation-duration:.001ms !important; }
+  .pp-btn, .pp-service-cta, .pp-project-cta, .pp-toolkit-cta-btn{ transform:none !important; }
+}
+
+/* 11) No-blur fallback: keep contrast */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .pp-service-inner,
+  .pp-contact-section .pp-form,
+  .pp-faq-item,
+  .pp-contact-section .pp-contact-card,
+  .pp-cta,
+  .pp-btn{
+    background: rgba(255,255,255,0.10);
+  }
+}
+
+/* 12) GLASS BADGE — real glass ring around arrows/icons */
+.pp-btn__badge,
+.btn-primary .icon{
+  position: relative;
+  background: var(--glass-grad-spec-1), var(--glass-grad-spec-2), var(--glass-grad-top), rgba(255,255,255,0.10);
+  border: 2px solid rgba(250,250,251,0.60);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 6px 14px rgba(0,0,0,0.24);
+}
+.pp-btn__badge::after,
+.btn-primary .icon::after{
+  content:""; position:absolute; left:2px; right:2px; top:2px; height:42%;
+  border-radius:inherit; pointer-events:none;
+  background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,0));
+  opacity:.65; filter: blur(.4px);
+}
+.pp-btn:hover .pp-btn__badge,
+.btn-primary:hover .icon{
+  background: var(--glass-grad-spec-1), var(--glass-grad-spec-2),
+              linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.10)),
+              rgba(255,255,255,0.12);
+  border-color: rgba(250,250,251,0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    0 10px 22px rgba(0,0,0,0.28);
+}
+.pp-btn:focus-visible .pp-btn__badge,
+.btn-primary:focus-visible .icon{
+  box-shadow:
+    0 0 0 3px rgba(238,35,123,.24),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 8px 22px rgba(0,0,0,.24);
+}
+
+
+/* 13) Mobile micro-typography */
+@media (max-width:560px){
+  .pp-services-desc,
+  .pp-projects-desc,
+  .pp-team-desc,
+  .pp-faq-desc,
+  .pp-contact-section .pp-contact-desc{ font-size: clamp(14px, 4.2vw, 18px); }
+  .pp-service-text,
+  .pp-project-text,
+  .pp-team-bio{ font-size: clamp(13px, 3.8vw, 16px); }
+}
+
+/* 14) Safe-area guards (iOS notch, etc.) */
+body{
+  padding-left: max(0px, env(safe-area-inset-left));
+  padding-right: max(0px, env(safe-area-inset-right));
+}
+.pp-navbar{
+  padding-left: calc(var(--container-pad) + env(safe-area-inset-left));
+  padding-right: calc(var(--container-pad) + env(safe-area-inset-right));
+}
+
+/* === NAV — hover/active rosa (usa la palette) === */
+.pp-nav-item{
+  position: relative;
+  transition: color .18s ease, text-shadow .18s ease;
+}
+.pp-nav-item::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px; height:2px;
+  background: linear-gradient(90deg, var(--axl-pink-300), var(--axl-pink-600));
+  transform: scaleX(0); transform-origin: left center;
+  transition: transform .22s ease;
+  opacity:.9;
+}
+
+/* Hover: testo rosa + underline gradiente */
+.pp-nav-item:hover{
+  color: var(--axl-pink-300);
+  text-shadow: 0 0 12px rgba(238,35,123,.35);
+}
+.pp-nav-item:hover::after{ transform: scaleX(1); }
+
+/* Focus tastiera accessibile */
+.pp-nav-item:focus-visible{
+  outline: 2px solid var(--axl-pink-500);
+  outline-offset: 4px;
+  border-radius: 6px;
+  color: var(--axl-pink-500);
+}
+
+/* Stato attivo (facoltativo: .is-active o aria-current) */
+.pp-nav-item.is-active,
+.pp-nav-item[aria-current="page"]{
+  color: var(--axl-pink-500);
+}
+.pp-nav-item.is-active::after,
+.pp-nav-item[aria-current="page"]::after{
+  transform: scaleX(1);
+}
+
+/* Icona di "Contattaci" sincronizzata col colore del link */
+.pp-contact svg path{ fill: currentColor !important; }
+.pp-contact:hover{ color: var(--axl-pink-300); }
+
+/* ===== pp-service-cta — badge più grande e più trasparente ===== */
+.pp-service-cta-badge{
+  width: 36px;                 /* + grande (prima 24px) */
+  height: 36px;
+  background: rgba(255,255,255,.08);          /* meno bianco */
+  border: 2px solid rgba(250,250,251,.40);    /* più trasparente */
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 8px 16px rgba(0,0,0,.22);
+}
+
+/* scala l’icona dentro al nuovo cerchio */
+.pp-service-cta-badge svg{
+  width: 17px;
+  height: 19px;
+}
+
+/* stati */
+.pp-service-cta:hover .pp-service-cta-badge{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(250,250,251,.50);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 10px 20px rgba(0,0,0,.24);
+}
+
+.pp-service-cta:active .pp-service-cta-badge{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(250,250,251,.60);
+  transform: translateY(0) scale(.98);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 6px 14px rgba(0,0,0,.22);
+}
+
+/* ===== pp-service-cta — badge centrato, più grande e più trasparente ===== */
+.pp-service-cta-badge{
+  /* sizing */
+  width: 40px;                 /* un po' più grande per dare respiro all'icona */
+  height: 40px;
+  border-radius: 50%;
+  flex: 0 0 40px;              /* evita schiacciamenti */
+
+  /* centering */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;              /* elimina la linea di base che sposta l'SVG */
+  overflow: hidden;
+
+  /* glass */
+  background: rgba(255,255,255,.08);
+  border: 2px solid rgba(250,250,251,.40);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 8px 16px rgba(0,0,0,.22);
+}
+
+/* l’SVG usa le dimensioni del badge e non “sborda” */
+.pp-service-cta-badge svg{
+  width: 18px;                 /* forza dimensione interna */
+  height: 18px;
+  display: block;              /* niente spazio extra sotto l’SVG */
+  pointer-events: none;
+  transform: translateY(0);    /* neutralizza eventuali eredità */
+}
+
+/* hover/pressed del badge */
+.pp-service-cta:hover .pp-service-cta-badge{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(250,250,251,.50);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 10px 20px rgba(0,0,0,.24);
+}
+
+.pp-service-cta:active .pp-service-cta-badge{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(250,250,251,.60);
+  transform: translateY(0) scale(.98);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 6px 14px rgba(0,0,0,.22);
+}
+
+/* (opzionale) su schermi molto piccoli riduciamo leggermente */
+@media (max-width: 420px){
+  .pp-service-cta-badge{ width: 36px; height: 36px; flex-basis: 36px; }
+}
+
+/* ===== pp-service-cta — effetto PRESSED (mouse/touch + stato persistente .is-pressed) ===== */
+.pp-service-cta{
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .12s ease, color .12s ease, outline-color .12s ease;
+  will-change: transform;
+}
+
+/* Stato pressed (mentre tieni premuto) e persistente (aggiungi .is-pressed via JS se vuoi mantenerlo) */
+.pp-service-cta:active,
+.pp-service-cta.is-pressed{
+  color: var(--axl-pink-600);              /* la freccia (currentColor) diventa rosa brand */
+  outline-color: var(--axl-pink-600);
+  transform: translateY(0) scale(.98);     /* bottone leggermente “schiacciato” */
+}
+
+/* Badge: aspetto “affondato” + inner shadow */
+.pp-service-cta .pp-service-cta-badge{
+  transition: transform .1s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+.pp-service-cta:active .pp-service-cta-badge,
+.pp-service-cta.is-pressed .pp-service-cta-badge{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(250,250,251,.65);
+  transform: translateY(0) scale(.94);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.18),
+    inset 0 -2px 6px rgba(255,255,255,.08),
+    0 4px 10px rgba(0,0,0,.20);
+}
+
+/* Freccia: leggero “nudge” verso il basso per il feedback */
+.pp-service-cta .pp-service-cta-badge svg{
+  transition: transform .1s ease;
+}
+.pp-service-cta:active .pp-service-cta-badge svg,
+.pp-service-cta.is-pressed .pp-service-cta-badge svg{
+  transform: translateY(1px);
+}
+
+
+
+.pp-btn.pp-btn--sm.pp-keep:hover{
+  color: var(--axl-pink-300);
+  outline-color: var(--axl-pink-500);
+  background: rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 10px 26px rgba(238,35,123,.16);
+  transform: translateY(-1px);
+}
+
+.pp-btn.pp-btn--sm.pp-keep:active,
+.pp-btn.pp-btn--sm.pp-keep.is-pressed{
+  color: var(--axl-pink-600);
+  outline-color: var(--axl-pink-600);
+  transform: translateY(0) scale(.98);
+}
+
+.pp-btn.pp-btn--sm.pp-keep:focus-visible{
+  box-shadow:
+    0 0 0 3px rgba(238,35,123,.24),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+
+
+.pp-btn.pp-btn--sm.pp-keep .pp-btn__badge svg{
+  display: block;
+  width: 17px; height: 19px;
+  fill: currentColor;             /* segue il colore del testo/stato */
+}
+
+.pp-btn.pp-btn--sm.pp-keep:hover .pp-btn__badge{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.10)),
+    rgba(255,255,255,.10);
+  border-color: rgba(250,250,251,.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 10px 20px rgba(0,0,0,.24);
+}
+
+
+
+.pp-btn.pp-btn--sm.pp-keep:active .pp-btn__badge svg,
+.pp-btn.pp-btn--sm.pp-keep.is-pressed .pp-btn__badge svg{
+  transform: translateY(1px);
+}
+
+/* Fallback se il blur non è supportato */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .pp-btn.pp-btn--sm.pp-keep .pp-btn__badge{
+    background: rgba(255,255,255,.12);
+  }
+}
+
+/* ===== TEAM CTA — glass, hover & pressed (override) ===== */
+.pp-team-cta{
+  display:inline-flex; align-items:center; gap:16px;
+  padding:10px 16px 10px 28px;
+  border-radius:32px; text-decoration:none;
+  font-family:"Urbanist"; font-weight:800; text-transform:uppercase; letter-spacing:.5px;
+  color:#FAFAFB;
+
+  background: rgba(255,255,255,0.06);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+  outline:1px solid var(--axl-pink-300); outline-offset:-1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 10px 26px rgba(238,35,123,.16);
+
+  transition:
+    transform .18s ease,
+    outline-color .18s ease,
+    box-shadow .18s ease,
+    background-color .18s ease,
+    color .18s ease;
+}
+
+/* badge circolare “glass” */
+.pp-team-cta-badge{
+  width:36px; height:36px; flex:0 0 36px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:999px; position:relative;
+
+  background:
+    radial-gradient(90% 120% at 28% 8%, rgba(255,255,255,.38) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(120% 90% at 72% 120%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.06)),
+    rgba(255,255,255,0.10);
+  border:2px solid rgba(250,250,251,0.60);
+
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  backdrop-filter: blur(12px) saturate(120%);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 6px 14px rgba(0,0,0,0.24);
+}
+
+/* riflesso alto */
+.pp-team-cta-badge::after{
+  content:""; position:absolute; left:2px; right:2px; top:2px; height:42%;
+  border-radius:inherit; pointer-events:none;
+  background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,0));
+  opacity:.65; filter: blur(.4px);
+}
+
+/* chevron con i bordi, segue currentColor */
+.pp-cta-chev{
+  width:10px; height:10px; display:block;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform: rotate(-45deg);           /* ► */
+  transition: transform .12s ease, opacity .12s ease;
+  opacity:.98;
+}
+
+/* hover */
+.pp-team-cta:hover{
+  background: rgba(255,255,255,0.10);
+  outline-color: var(--axl-pink-600);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 14px 30px rgba(238,35,123,.22);
+}
+.pp-team-cta:hover .pp-team-cta-badge{
+  background:
+    radial-gradient(90% 120% at 28% 8%, rgba(255,255,255,.40) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(120% 90% at 72% 120%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.10)),
+    rgba(255,255,255,0.12);
+  border-color: rgba(250,250,251,.72);
+}
+
+/* pressed (mouse down / touch) */
+.pp-team-cta:active{
+  transform: translateY(0) scale(.98);
+  color: var(--axl-pink-600);
+  outline-color: var(--axl-pink-600);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 8px 22px rgba(238,35,123,.16);
+}
+.pp-team-cta:active .pp-team-cta-badge{
+  transform: scale(.94);
+  background: rgba(255,255,255,.14);
+  border-color: rgba(250,250,251,.65);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.18),
+    inset 0 -2px 6px rgba(255,255,255,.08),
+    0 4px 10px rgba(0,0,0,.20);
+}
+.pp-team-cta:active .pp-cta-chev{ transform: rotate(-45deg) translateY(1px); }
+
+/* focus accessibile */
+.pp-team-cta:focus-visible{
+  outline:2px solid var(--axl-pink-500);
+  outline-offset:4px;
+  box-shadow: 0 0 0 3px rgba(238,35,123,.24), inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+/* fallback no-blur */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))){
+  .pp-team-cta{ background: rgba(255,255,255,0.10); }
+  .pp-team-cta-badge{ background: rgba(255,255,255,0.12); }
+}
+
+.pp-toolkit-cta-btn:active,
+.pp-toolkit-cta-btn.is-pressed{
+  color: var(--axl-pink-600);
+  transform: translateY(0) scale(.98);
+}
+.pp-toolkit-cta-btn:active .pp-toolkit-cta-badge,
+.pp-toolkit-cta-btn.is-pressed .pp-toolkit-cta-badge{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(250,250,251,.65);
+  transform: translateY(0) scale(.94);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.18),
+    inset 0 -2px 6px rgba(255,255,255,.08),
+    0 4px 10px rgba(0,0,0,.20);
+}
+.pp-toolkit-cta-btn .pp-toolkit-cta-badge svg{
+  transition: transform .1s ease;
+}
+.pp-toolkit-cta-btn:active .pp-toolkit-cta-badge svg,
+.pp-toolkit-cta-btn.is-pressed .pp-toolkit-cta-badge svg{
+  transform: translateY(1px);
+}
+
+/* === Submit "Invia" — stesso stile degli altri bottoni === */
+#c_submit.pp-btn{
+  /* opzionale: ribadisco i token del primario, nel caso fossero stati modificati sopra */
+  --btn-h: 56px;
+  --btn-pad-l: 56px;
+  --btn-pad-r: 16px;
+}
+
+/* badge: usa il glass globale; qui forzo solo il sizing dell’icona */
+#c_submit .pp-btn__badge svg{
+  width: 12px;
+  height: 12px;
+  display: block;
+  fill: currentColor;              /* segue il colore del bottone (hover/pressed) */
+  transition: transform .1s ease;  /* micro nudge in pressed */
+}
+
+/* pressed: leggero affondo dell’icona come sugli altri */
+#c_submit:active .pp-btn__badge svg,
+#c_submit.is-pressed .pp-btn__badge svg{
+  transform: translateY(1px);
+}
+
+/* (facoltativo) se vuoi assicurarti il badge 36x36 come gli altri */
+#c_submit .pp-btn__badge{
+  width: 36px;
+  height: 36px;
 }
