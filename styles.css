@@ -666,7 +666,7 @@ a.pp-logo:focus-visible{
 }
 
 .pp-toolkit-block-title{
-  margin:0 0 18px;
+  margin:0 0 9px;
   font-family:"Urbanist";
   font-weight:700;
   font-size: clamp(24px, 3vw, 42px);
@@ -2134,8 +2134,8 @@ body{ padding-left: max(0px, env(safe-area-inset-left)); padding-right: max(0px,
 /* 6) TOOLKIT icons: auto-fit grid (fewer media queries) */
 .pp-toolkit-icons{
   --pp-icon-size: clamp(36px, 7vw, 80px);
-  --pp-icon-gap-x: clamp(20px, 3.5vw, 60px);
-  --pp-icon-gap-y: clamp(18px, 2.5vw, 32px);
+  --pp-icon-gap-x: clamp(20px, 3.5vw, 25px);
+  --pp-icon-gap-y: clamp(18px, 2.5vw, 64px);
   grid-template-columns: repeat(auto-fit, minmax(var(--pp-icon-size), 1fr));
 }
 .pp-toolkit-cta{ margin-top: clamp(18px, 3.5vw, 40px); }
